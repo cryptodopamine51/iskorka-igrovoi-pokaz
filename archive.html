@@ -1,0 +1,1115 @@
+<!doctype html>
+<html lang="ru">
+<head><meta name="robots" content="noindex, nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#121728"><link rel="icon" href="data:,"><title>Искорка · Смотрим и играем</title><style>@font-face{font-family:Balsamiq;src:url(./assets/fcc9c00a9ad6e78673fa.ttf) format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:Balsamiq;src:url(./assets/a3302bd8424e6a37704e.ttf) format('truetype');font-weight:700;font-display:swap}
+*{box-sizing:border-box}html{color-scheme:dark;background:#101526}body{margin:0;font-family:Balsamiq,ui-rounded,system-ui,sans-serif;color:#fff7ec}button,select{font:inherit}button{cursor:pointer}button:disabled{cursor:default}button:focus-visible,summary:focus-visible,select:focus-visible{outline:3px solid #82e3ff;outline-offset:3px}button{touch-action:manipulation}[hidden]{display:none!important}
+.studio{background:#111625;color:#eeeef8;border-bottom:1px solid #393e53}.studio-inner{margin:auto;max-width:1800px;display:flex;align-items:center;gap:12px;padding:9px clamp(12px,2.5vw,42px);min-height:54px}.studio-name{display:flex;align-items:baseline;gap:10px;font-size:22px;font-weight:700;line-height:1.1;margin-right:8px}.studio-name small{font:400 14px Balsamiq;color:#c6c8d7;white-space:nowrap}.theme-list{display:flex;align-items:center;gap:2px;flex:1}.studio button,#present-exit{background:transparent;color:#f0edf4;border:1px solid transparent;border-radius:8px;padding:8px 11px;white-space:nowrap}.studio button[aria-pressed=true]{background:#343a52;border-color:#626984;color:white}.studio button:hover,.studio button:focus-visible{background:#30364a}.studio .studio-btn{border-color:#52596f}.studio .present{font:24px/1 system-ui;padding:6px 12px}
+#stage{max-width:2000px;margin:auto;outline:0}#present-exit{position:fixed;right:12px;top:6px;z-index:10;font-size:14px;background:#10162cf2;border-color:#70788d}.during-show #stage{max-width:none}
+#overlay{color:#232342;background:#faf7f1;border:0;padding:0;border-radius:18px;width:min(1180px,calc(100% - 38px));max-width:none;max-height:90dvh;box-shadow:0 24px 100px #07081c8a;color-scheme:light;font-size:17px}
+#overlay.small{width:min(445px,calc(100% - 28px))}#overlay::backdrop{background:#090c21c9}#sheet{padding:clamp(16px,3.1vw,38px)}.sheet-head{display:flex;align-items:start;justify-content:space-between;gap:12px}.sheet-head h2{font-size:clamp(26px,3vw,39px);line-height:1.12;margin:0}.sheet-close{font:22px/1.1 system-ui;border:1px solid #baadbc;background:white;color:#24233b;width:38px;height:38px;flex:none;border-radius:50%}.sheet-intro{color:#484660;margin:8px 0 18px;line-height:1.45;max-width:75ch}.selector-grid{display:grid;grid-template-columns:minmax(180px,0.85fr) minmax(280px,1.8fr);gap:22px}.stop-picker{margin:0;display:grid;align-content:start;gap:3px}.stop-picker button,.format-entry,.comparison-link,.launch,.selector-next,.return-route{font:inherit}.stop-picker button{display:grid;grid-template-columns:42px 1fr;text-align:left;gap:10px;align-items:center;background:transparent;color:#252740;border:1px solid transparent;border-radius:8px;padding:7px}.stop-picker button b{border-radius:50%;background:#e9e3e8;color:#414059;font-size:16px;display:grid;place-items:center;aspect-ratio:1}.stop-picker button[aria-pressed=true]{background:#e6e5f4;border-color:#989ac0}.stop-picker button[aria-pressed=true] b{background:#34396a;color:white}.stop-picker button:hover{background:#eeeaf0}.stop-picker button small{display:block;color:#5a5670;font-size:14px;margin-top:2px}
+.preview-place{height:clamp(118px,16vh,200px);width:100%;object-fit:cover;object-position:center 45%;border-radius:10px}.selected-stop h3{margin:10px 0 3px;font-size:25px}.selected-stop>p{margin:0 0 12px;color:#5c5870}.format-entry{display:grid;grid-template-columns:36px 1fr auto;align-items:center;gap:12px;position:relative;border:1px solid #ccc7d1;background:#fffefd;color:#272740;border-radius:9px;margin:7px 0;width:100%;text-align:left;padding:10px 12px}.format-entry:hover,.comparison-link:hover{background:#eeedf8;border-color:#9698bd}.format-entry strong,.format-entry small{display:block}.format-entry small{font-size:15px;line-height:1.3;margin-top:2px;color:#504c65}.format-symbol{color:#394776;font:24px/1.2 Balsamiq}.format-chevron{font-size:22px}.selector-next,.return-route{border:0;background:transparent;color:#39426a;margin-top:9px;text-decoration:underline;text-underline-offset:3px;padding:6px 0}.comp-table{width:100%;border-collapse:collapse;table-layout:fixed;text-align:left}.comp-table thead th{font-size:18px;border-bottom:2px solid #53526b;padding:9px 8px}.comp-table th:first-child{width:34%}.comp-table tbody th,.comp-table td{padding:12px 8px;border-bottom:1px solid #d8d3d9;vertical-align:top}.comp-table tbody th{font-weight:normal}.comp-table tbody th strong,.comp-table tbody th small{display:block}.comp-table tbody th strong{font-size:19px;line-height:1.18}.comp-table tbody th small{font-size:15px;line-height:1.32;margin:6px 0;color:#49455d}.comparison-link{width:100%;display:block;text-align:left;line-height:1.28;background:transparent;border:1px solid transparent;border-radius:6px;color:#302f49;padding:3px 5px}.comparison-link b{color:#414579}.compare-caption{font-size:14px;color:#575468;margin:8px 0 0}.detail-item{width:120px;height:120px;object-fit:contain;margin:10px 0 0}.detail-future{filter:brightness(0) saturate(0);opacity:.6}.detail-text{font-size:20px;line-height:1.45}.launch{padding:10px 16px;border:0;border-radius:9px;background:#343c6c;color:white}.player-tools{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;padding:8px 12px;background:#1a2034;color:#f2f0f5}.player-tools button{border:1px solid #58627c;color:#f3f4fa;background:none;padding:6px 10px;border-radius:20px}.player-tools button[aria-pressed=true]{background:#414e70;color:white}.player-tools>span{font-size:14px;color:#d5d4e0;margin-right:6px}
+@media(max-width:960px){.studio-inner{gap:5px;flex-wrap:wrap}.studio-name small{display:none}.selector-grid{gap:14px}}@media(max-width:650px){.studio-name{font-size:18px;margin:0}.studio button{font-size:13px;padding:7px 8px}.studio-inner{justify-content:center;padding:6px;gap:4px}.theme-list{flex-grow:0}.studio .present{font-size:18px}.selector-grid{grid-template-columns:minmax(0,1fr)}.stop-picker{display:flex;overflow:auto;padding:3px}.stop-picker button{display:block;text-align:center;white-space:nowrap;font-size:14px;min-width:78px}.stop-picker button b{width:28px;margin:0 auto 4px}.stop-picker button small{display:none}.comp-table th:first-child{width:34%}.comp-table{font-size:14px}.comp-table tbody th strong{font-size:15px}.comp-table tbody th small{font-size:13px}.comp-table td,.comp-table tbody th{padding:8px 3px}.player-tools{gap:5px}.player-tools>span{display:none}.player-tools button{font-size:14px}}
+.listening{margin:10px 0 0;display:grid;gap:7px;color:#ffefd7;text-align:left}.listening strong{font-size:20px}.listening>div{display:flex;gap:8px;flex-wrap:wrap}.listening button{border:1px solid #879ab4;color:#f5f5ff;background:#293a50;border-radius:11px;padding:8px 12px}.listening button[aria-pressed=true]{background:#544330;border-color:#f9c982}.listening summary{cursor:pointer;color:#e0e2ef}.listening details p{line-height:1.4;margin:8px 0}.sound-status:empty{display:none}
+
+.home-stage { container-type:inline-size; width:100%; color:#fff; font-family:Balsamiq,'Trebuchet MS',sans-serif; line-height:1.18; }
+.home-stage *, .home-stage *::before, .home-stage *::after { box-sizing:border-box; }
+.home-stage button { appearance:none; border:0; margin:0; background:none; padding:0; font:inherit; color:inherit; cursor:pointer; text-align:inherit; }
+.home-stage button:focus-visible { outline:3px solid #fff49d; outline-offset:4px; border-radius:5px; }
+.home-stage button:active { transform:translateY(1px); }
+.home-stage h2, .home-stage h3, .home-stage p, .home-stage ul, .home-stage li { margin:0; padding:0; }
+.home-stage ul { list-style:none; }
+.home-world { position:relative; isolation:isolate; width:100%; aspect-ratio:1.96; min-height:500px; overflow:hidden; background:#102342; }
+.home-art, .home-shade { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; }
+.home-art { z-index:-3; display:block; object-fit:cover; }
+.home-shade { z-index:-2; }
+.home-stage .home-title { position:absolute; font-weight:700; font-size:clamp(41px,5.65cqw,112px); line-height:.91; letter-spacing:-.055em; }
+.home-title-line { display:block; }
+.home-stage .home-status { position:absolute; top:5.5%; right:4.6%; display:flex; align-items:center; gap:.75em; font-size:clamp(14px,1.34cqw,26px); line-height:1; font-weight:700; }
+.home-day { display:flex; align-items:center; gap:.72em; }
+.home-day::after { content:'✦'; font-size:.66em; }
+.home-stage .home-gear, .home-stage .home-rules, .home-stage .home-episode { position:absolute; }
+.home-stage .home-section-title { font-size:clamp(15px,1.38cqw,29px); line-height:1.15; letter-spacing:.012em; font-weight:700; }
+.home-stage .home-rule-list { display:grid; margin-top:.65cqw; }
+.home-stage .home-rule { display:flex; align-items:center; gap:.68em; min-height:max(30px,2.72cqw); font-size:clamp(16px,1.64cqw,33px); line-height:1.08; transition:color .15s ease; }
+.home-rule-name { display:block; }
+.home-rule:hover .home-rule-name { text-decoration:underline; text-underline-offset:.18em; }
+.home-stage .home-count { margin-left:.9em; font-weight:400; font-size:.84em; white-space:nowrap; }
+.home-stage .home-gear-list { display:flex; align-items:flex-end; gap:.48cqw; }
+.home-gear-list li { flex:1 1 0; min-width:0; }
+.home-stage .home-gear-button { width:100%; display:flex; flex-direction:column; align-items:center; text-align:center; padding:.25cqw 0; }
+.home-gear-holder { position:relative; display:grid; grid-template: minmax(0,1fr) / minmax(0,1fr); place-items:center; width:100%; height:4.6cqw; min-height:42px; max-height:112px; }
+.home-stage .home-gear-art { max-width:83%; height:90%; display:block; object-fit:contain; transition:transform .16s ease; }
+.home-gear-button:hover .home-gear-art { transform:translateY(-3px) rotate(-5deg); }
+.home-item-status { position:absolute; bottom:2%; right:9%; border-radius:50%; display:grid; place-items:center; width:1.22em; height:1.22em; line-height:1; font-weight:bold; font-size:clamp(10px,.84cqw,16px); }
+.home-item-name { display:block; margin-top:.43em; font-size:clamp(12px,1.16cqw,23px); line-height:1.13; }
+.home-episode { display:flex; flex-direction:column; align-items:center; }
+.home-stage .home-place { font-size:clamp(17px,1.68cqw,34px); font-weight:700; margin-bottom:.42em; text-align:center; }
+.home-stage .home-play { position:relative; display:inline-flex; gap:.55em; align-items:center; min-height:44px; padding:.54em .98em .57em .82em; border-radius:2em; font-size:clamp(17px,1.55cqw,31px); line-height:1; font-weight:700; white-space:nowrap; transition:filter .15s ease,transform .15s ease; }
+.home-stage .home-play:hover { filter:brightness(1.1); transform:translateY(-2px); }
+.home-play-mark { font-family:Arial,sans-serif; font-size:.72em; line-height:1; }
+
+/* The names and their stars sit in the sky, the labelled objects run along the snowy near bank. */
+.home-pass .home-art { object-position:57% 53%; }
+.home-pass .home-shade { background:linear-gradient(90deg,rgba(5,18,45,.78) 0%,rgba(8,28,58,.55) 22%,rgba(8,24,50,.16) 44%,transparent 63%),linear-gradient(0deg,rgba(4,15,33,.89) 0%,rgba(4,19,39,.55) 11%,transparent 34%),linear-gradient(180deg,rgba(4,15,40,.32),transparent 20%); }
+.home-pass .home-title { top:6.3%; left:5%; color:#ffedb9; text-shadow:0 .045em #244367,0 .065em #18283a,0 3px 18px #0a1836; }
+.home-pass .home-title-line:last-child { color:#fff8e0; margin-left:.21em; }
+.home-pass .home-status, .home-pass .home-place { color:#ffedc7; text-shadow:0 2px 4px #11293c,0 0 7px #081427; }
+.home-pass .home-rules { left:5%; top:34%; width:46%; }
+.home-pass .home-rules .home-section-title { color:#9ed6f0; text-shadow:0 1px 5px #102d54; }
+.home-pass .home-rule { color:#fffbeb; text-shadow:0 1px 5px #061933,0 0 9px #071d36; }
+.home-pass .home-rule-list li:nth-child(2), .home-pass .home-rule-list li:nth-child(4) { margin-left:1.05cqw; }
+.home-pass .home-rule-list li:nth-child(3) { margin-left:1.75cqw; }
+.home-stars { display:block; flex:0 0 auto; width:2.8cqw; min-width:25px; height:auto; overflow:visible; color:#f1db8d; filter:drop-shadow(0 0 3px rgba(255,218,128,.58)); }
+.home-stars polyline { fill:none; stroke:#c3d4da; stroke-width:.85; }
+.home-stars circle { fill:currentColor; }
+.home-pass .home-gear { bottom:4.4%; left:5.1%; width:49%; }
+.home-pass .home-gear .home-section-title { color:#e8f3f8; }
+.home-pass .home-count { color:#bcd7e7; }
+.home-pass .home-gear-list { position:relative; margin-top:.36cqw; }
+.home-pass .home-gear-list::before { content:''; position:absolute; z-index:-1; left:4%; right:4%; top:57%; border-bottom:1px dashed #91b6cf91; }
+.home-pass .home-found .home-gear-art { filter:drop-shadow(0 0 4px #f8da99aa); }
+.home-pass .home-unfound .home-gear-art { filter:grayscale(1) brightness(.9) contrast(.75) drop-shadow(0 0 2px #b1d6ea); }
+.home-pass .home-item-name { color:#f7f4e9; text-shadow:0 1px 4px #06142e; }
+.home-pass .home-item-status { color:#1b2948; background:#f6d370; }
+.home-pass .home-unfound .home-item-status { background:#9fb1c2; color:#17243c; }
+.home-pass .home-episode { right:6%; bottom:5.7%; }
+.home-pass .home-play { color:#212947; background:linear-gradient(#ffefb6,#f5cf79); border:1px solid #fff6cf; box-shadow:0 4px 0 #a8723e,0 6px 15px #0e203a88; }
+
+/* The velvet curtain, paper fox and moon belong to one shadow stage. The props swing from the apron. */
+.home-theater .home-world { background:#242034; }
+.home-theater .home-art { object-position:52% 50%; }
+.home-theater .home-shade { background:linear-gradient(0deg,#211726ef 0%,rgba(38,24,48,.72) 13%,transparent 30%),linear-gradient(90deg,transparent 3%,rgba(30,25,43,.22) 21%,rgba(36,28,47,.26) 39%,transparent 54%); }
+.home-theater .home-title { top:14%; left:5.8%; width:44%; text-align:center; color:#ffd395; font-size:clamp(41px,5.8cqw,116px); transform:rotate(-2deg); text-shadow:2px 3px #aa504b,4px 5px #3b223e; }
+.home-theater .home-title-line { display:inline; }
+.home-theater .home-title-line + .home-title-line::before { content:' '; }
+.home-theater .home-status { top:5.3%; right:8.5%; color:#fff0bf; text-shadow:0 1px 5px #201827,0 0 10px #30152a; }
+.home-theater .home-rules { left:7.5%; top:34%; width:44%; text-align:center; }
+.home-theater .home-rules .home-section-title { color:#e6ad95; }
+.home-theater .home-rule-list { margin-top:.55cqw; }
+.home-theater .home-rule { margin:0 auto; color:#ffefcc; justify-content:center; gap:.4em; text-shadow:0 1px 4px #25162e; }
+.home-theater .home-rule-cut { color:#f2a16f; font-size:.74em; }
+.home-theater .home-gear { bottom:3.5%; left:6.8%; width:47%; }
+.home-theater .home-gear .home-section-title { color:#ffdc9d; }
+.home-theater .home-count { color:#e9bfac; }
+.home-theater .home-gear-list { margin-top:.38cqw; }
+.home-theater .home-gear-holder::before { content:''; position:absolute; top:-.15cqw; height:75%; left:50%; width:1px; background:linear-gradient(#dbc3b266,transparent); }
+.home-theater .home-found .home-gear-art { filter:drop-shadow(2px 2px 0 #2b1831) drop-shadow(0 0 2px #f5bf78); }
+.home-theater .home-unfound .home-gear-art { filter:brightness(0) saturate(1) drop-shadow(1px 0 0 #ca9f9a) drop-shadow(-1px -1px 0 #b49299); }
+.home-theater .home-item-name { color:#f7dfc6; }
+.home-theater .home-item-status { background:#efb584; color:#392135; }
+.home-theater .home-unfound .home-item-status { background:#937b8a; color:#211829; }
+.home-theater .home-episode { right:8.7%; bottom:4.7%; }
+.home-theater .home-place { color:#fce0b1; text-shadow:0 1px 5px #25152d; }
+.home-theater .home-play { color:#fff5cd; border-radius:.13em; border:2px solid #f5c784; background:#873e47; box-shadow:0 0 0 2px #43273a,0 4px 0 2px #321b32; }
+.home-theater .home-play::before, .home-theater .home-play::after { content:''; position:absolute; top:calc(50% - 3px); width:6px; height:6px; border-radius:50%; background:#edc08c; }
+.home-theater .home-play::before { left:3px; }
+.home-theater .home-play::after { right:3px; }
+
+@container (min-width:681px) and (max-width:915px) {
+  .home-world { min-height:515px; }
+  .home-stage .home-rule { min-height:31px; }
+  .home-pass .home-rules { top:30%; width:49%; }
+  .home-theater .home-rules { top:31%; width:51%; left:3%; }
+  .home-stage .home-gear { width:57%; }
+  .home-stage .home-episode { right:4%; }
+}
+
+@container (max-width:680px) {
+  .home-stage .home-world { display:grid; grid-template-areas:'title' 'status' 'episode' 'rules' 'gear'; align-content:start; aspect-ratio:auto; min-height:0; padding:22px 20px 23px; }
+  .home-stage .home-art { width:100%; height:68cqw; object-fit:cover; object-position:56% center; }
+  .home-stage .home-title, .home-stage .home-status, .home-stage .home-episode, .home-stage .home-rules, .home-stage .home-gear { position:relative; inset:auto; width:auto; }
+  .home-stage .home-title { grid-area:title; place-self:start; max-width:62%; text-align:left; font-size:clamp(34px,8.6cqw,55px); }
+  .home-stage .home-status { grid-area:status; justify-self:start; align-self:start; margin-top:11px; border:0; font-size:13px; }
+  .home-stage .home-episode { grid-area:episode; margin-top:clamp(40px,13.8cqw,92px); align-items:start; }
+  .home-stage .home-place { text-align:left; font-size:18px; margin-bottom:6px; }
+  .home-stage .home-play { font-size:16px; min-height:40px; }
+  .home-stage .home-rules { grid-area:rules; margin-top:25px; text-align:left; }
+  .home-stage .home-section-title { font-size:16px; }
+  .home-stage .home-rule-list { margin-top:6px; }
+  .home-stage .home-rule { min-height:35px; margin:0; justify-content:start; font-size:17px; }
+  .home-stage .home-gear { grid-area:gear; margin-top:20px; }
+  .home-stage .home-gear-list { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:2px; margin-top:8px; }
+  .home-stage .home-gear-holder { height:9.2cqw; min-height:35px; }
+  .home-stage .home-item-name { font-size:clamp(10px,2.38cqw,14px); }
+  .home-stage .home-item-status { right:1%; }
+  .home-pass .home-shade { background:linear-gradient(0deg,#112641 calc(100% - 65cqw), transparent calc(100% - 40cqw)),linear-gradient(90deg,#0a183e99,transparent 60%); }
+  .home-pass .home-stars { width:28px; }
+  .home-pass .home-rules .home-rule-list li { margin-left:0; }
+  .home-theater .home-world { padding-top:8.5cqw; }
+  .home-theater .home-shade { background:linear-gradient(0deg,#272237 calc(100% - 65cqw),transparent calc(100% - 44cqw)); }
+  .home-theater .home-title-line { display:block; }
+  .home-theater .home-title-line + .home-title-line::before { content:none; }
+  .home-theater .home-art { object-position:53% 40%; }
+  .home-theater .home-title, .home-theater .home-status { margin-left:3.4cqw; }
+  .home-theater .home-episode { margin-top:clamp(30px,9.5cqw,72px); }
+}
+@container (max-width:380px) {
+  .home-stage .home-world { padding-left:14px; padding-right:14px; }
+  .home-stage .home-gear-list { grid-template-columns:repeat(3,minmax(0,1fr)); gap:7px 3px; }
+  .home-stage .home-gear-holder { height:42px; }
+  .home-stage .home-item-name { font-size:12px; }
+  .home-stage .home-item-status { right:18%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-stage *, .home-stage *::after, .home-stage *::before { transition:none !important; animation:none !important; }
+}
+
+/* The first game's glade and Iskorka, with room for the five rules and all six finds. */
+.home-glade {color:#234c42}
+.home-glade .home-world {background:#deedf3}
+.home-glade .home-art {object-position:center}
+.home-glade .home-shade {
+  background:linear-gradient(0deg,#eef7f8 0%,#eef7f8b7 16%,transparent 38%),
+             linear-gradient(90deg,transparent 43%,#eef7f825 58%,#eff8f597 100%);
+}
+.home-glade .home-title {
+  top:12%;left:52%;width:44%;font-size:clamp(39px,5.4cqw,105px);
+  text-shadow:0 2px 0 #fafffa,0 0 18px #fff;
+}
+.home-glade .home-status {
+  top:4%;right:4.2%;padding:.65em .95em;border:1px solid #aac4bc;border-radius:2em;
+  color:#244d44;background:#f8f9eb;
+}
+.home-fox {
+  position:absolute;z-index:-1;top:12%;left:7%;width:43%;height:70%;
+  object-fit:contain;object-position:50% 100%;filter:drop-shadow(0 9px 5px #79889580);
+  pointer-events:none;
+}
+.home-glade .home-rules {
+  left:52%;top:28%;width:42%;padding:clamp(10px,1.2cqw,23px) clamp(12px,1.5cqw,30px);
+  background:#fcfff4eb;border:1px solid #fcfff9;border-radius:19px;
+  box-shadow:0 6px 16px #27464220;
+}
+.home-glade .home-section-title {color:#244d44}
+.home-glade .home-rule {color:#214a40;min-height:max(30px,2.45cqw)}
+.home-rule-emblem {display:grid;place-items:center;width:1.6em;height:1.6em;color:#417960;background:#e2eee1;border-radius:50%;font-size:.76em;flex:none}
+.home-glade .home-episode {left:52%;right:6%;bottom:24%;align-items:flex-start}
+.home-glade .home-place {color:#214a40;text-shadow:0 1px 4px #fff,0 1px 10px #fff}
+.home-glade .home-play {color:#4b3512;background:linear-gradient(#fff0b2,#ffcb55);border:2px solid #fff0b2;box-shadow:0 4px 0 #a16b21;font-weight:700}
+.home-glade .home-gear {
+  left:4.5%;bottom:3.1%;width:90%;padding:9px 14px;background:#f7faf2e8;
+  border:1px solid #bdcfc5;border-radius:16px;box-shadow:0 3px 0 #77928a50;
+}
+.home-glade .home-gear-list {gap:2cqw;margin-top:5px}
+.home-glade .home-gear-holder {height:4.35cqw}
+.home-glade .home-found .home-gear-art {filter:drop-shadow(0 3px 3px #76908155)}
+.home-glade .home-unfound .home-gear-art {filter:grayscale(1) brightness(.8);opacity:.67}
+.home-glade .home-item-status {background:#38765a;color:#fff;right:24%}
+.home-glade .home-unfound .home-item-status {background:#dce3db;color:#41564f}
+@container (min-width:681px) and (max-width:915px) {
+  .home-glade .home-title {top:14%}
+  .home-glade .home-rules {top:26%;padding:9px 12px}
+  .home-glade .home-rule {min-height:27px}
+  .home-glade .home-episode {bottom:25%}
+}
+@container (max-width:680px) {
+  .home-glade .home-world {padding-inline:18px;background:#eef7f8}
+  .home-glade .home-art {height:74cqw}
+  .home-glade .home-shade {background:linear-gradient(180deg,#ecf7fa30,transparent 30cqw,#eef7f8 73cqw)}
+  .home-glade .home-title,.home-glade .home-status,.home-glade .home-episode,.home-glade .home-rules,.home-glade .home-gear {inset:auto;width:auto}
+  .home-glade .home-title {max-width:51%;text-shadow:0 1px 0 white,0 0 8px white}
+  .home-glade .home-status {margin-top:7px;border-radius:18px;padding:.35em .6em}
+  .home-glade .home-fox {top:5cqw;left:49%;width:48%;height:54cqw}
+  .home-glade .home-episode {margin-top:clamp(24px,9cqw,58px);align-items:start}
+  .home-glade .home-rules {padding:12px 13px;margin-top:23px}
+  .home-glade .home-gear {padding:11px 9px}
+  .home-glade .home-gear-holder {height:44px}
+  .home-glade .home-item-status {right:6%}
+}
+
+.qp-stage {
+  --qp-deep: #141f33;
+  --qp-ink: #172c3e;
+  --qp-paper: #fff5d8;
+  --qp-muted: #cbd7e0;
+  --qp-tint: #ffce73;
+  --qp-warm: #ffdc95;
+  --qp-rim: #475870;
+  background: radial-gradient(ellipse at 94% 0%, #344256 0, transparent 48%), var(--qp-deep);
+  color: #fff9e9;
+  width: 100%;
+  min-width: 0;
+  padding: clamp(15px, 2.5vw, 38px) clamp(16px, 3.6vw, 60px) clamp(26px, 3.6vw, 60px);
+  box-sizing: border-box;
+  font-family: inherit;
+  text-align: left;
+  container-type: inline-size;
+  isolation: isolate;
+}
+.qp-stage *, .qp-stage *::before, .qp-stage *::after {box-sizing: border-box;}
+.qp-stage.qp-fork {--qp-tint: #aee2d2; --qp-warm: #bedfcc;}
+.qp-stage.qp-direct {--qp-tint: #ffb3a5; --qp-warm: #ffbeb0;}
+.qp-stage :is(h2,h3,h4,p,figure) {margin: 0;}
+.qp-stage button, .qp-stage summary {font: inherit; cursor: pointer;}
+.qp-stage svg {width: 1.1em; height: 1.1em; flex: 0 0 auto;}
+.qp-stage button:focus-visible, .qp-stage summary:focus-visible {outline: 3px solid #fff8c8; outline-offset: 4px;}
+.qp-stage button:disabled {cursor: default;}
+.qp-top, .qp-main {width: min(100%, 1536px); margin-inline: auto;}
+.qp-top {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-bottom: clamp(14px, 1.8vw, 26px); gap: 12px;
+}
+.qp-format-tag {display: inline-flex; align-items: center; gap: 10px; font-size: clamp(17px, 1.3vw, 23px); font-weight: 700; color: var(--qp-tint);}
+.qp-format-tag svg {width: 29px; height: 29px; filter: drop-shadow(0 1px 6px #fbdfa526);}
+.qp-main {display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); align-items: start; gap: clamp(22px, 3.7vw, 64px);}
+.qp-image {position: sticky; top: 14px; width: 100%; min-width: 0;}
+.qp-scene-art {
+  width: 100%; height: auto; max-height: 62vh; display: block; object-fit: contain;
+  background: #1d2a3c; border-radius: 14px; box-shadow: 0 5px 20px #0913275c;
+}
+.qp-caption {display: flex; flex-direction: column; align-items: flex-start; gap: 4px; padding: 14px 2px 4px; color: #fffae7;}
+.qp-waypoint {display: inline-flex; align-items: center; gap: 6px; font-size: clamp(15px, 1.3vw, 21px); color: #ffe4a1;}
+.qp-waypoint svg {width: 17px; height: 17px;}
+.qp-stage .qp-place {font-size: clamp(29px, 3.1vw, 49px); line-height: 1.04; font-weight: 700; color: #fff7de; text-wrap: balance;}
+.qp-content {padding-block: clamp(2px, .65vw, 10px); display: flex; flex-direction: column; align-items: stretch; gap: clamp(11px, 1.2vw, 19px); min-width: 0;}
+.qp-stage .qp-setup {font-size: clamp(17px, 1.6vw, 26px); line-height: 1.33; color: #e1e8ec; text-wrap: pretty;}
+.qp-stage .qp-heading {font-size: clamp(29px, 2.65vw, 48px); line-height: 1.09; color: #fff8df; font-weight: 700; text-wrap: pretty; overflow-wrap: break-word;}
+.qp-heading:focus {outline: none;}
+.qp-instruction {display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--qp-tint); font-size: clamp(16px, 1.34vw, 22px); line-height: 1.17;}
+.qp-count {white-space: nowrap; font-size: .9em; color: #e1e8ec; font-variant-numeric: tabular-nums;}
+.qp-cards {display: grid; gap: 8px;}
+.qp-card {
+  position: relative; width: 100%; min-height: 48px; display: grid; align-items: center;
+  grid-template-columns: 2.2em 1fr 1.2em; column-gap: .65em; padding: .32em .68em .32em .35em;
+  border: 2px solid #7d92a0; border-radius: 14px 19px 16px 14px;
+  color: #f9f5e9; background: linear-gradient(110deg, #304154, #26364b);
+  font-size: clamp(16px, 1.4vw, 23px)!important; line-height: 1.19!important;
+  text-align: left; transition: background .15s, transform .15s, border-color .15s;
+}
+.qp-card:hover:enabled {border-color: var(--qp-tint); transform: translateX(2px);}
+.qp-card.qp-picked {background: #384a4f; border-color: var(--qp-tint); box-shadow: inset 3px 0 var(--qp-tint);}
+.qp-card:disabled {opacity: .62;}
+.qp-card .qp-pictogram {
+  display: grid; place-items: center; width: 1.68em; height: 1.57em; font-size: 1.27em;
+  background: #fff1c9; border-radius: 51% 47% 48% 43%;
+  color: #273744; line-height: 1; font-family: "Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+}
+.qp-card:nth-child(2) .qp-pictogram {background: #cee6e0; border-radius: 44% 52% 45% 53%;}
+.qp-card:nth-child(3) .qp-pictogram {background: #f2d4cf; border-radius: 55% 45% 51% 45%;}
+.qp-card-label {min-width: 0;}
+.qp-mark {justify-self: center; display: grid; place-items: center; min-width: 1.28em; height: 1.28em; color: #d9e6ee;}
+.qp-detect .qp-mark, .qp-direct .qp-mark {border: 1.5px solid #89a0ac; border-radius: 50%; width: 1.22em; min-width: auto; height: 1.22em;}
+.qp-picked .qp-mark {color: var(--qp-ink); background: var(--qp-tint); border-color: var(--qp-tint); font-weight: 700;}
+.qp-mark svg {width: 90%; height: 90%;}
+.qp-actions {display: flex; align-items: center; flex-wrap: wrap; gap: 8px 12px;}
+.qp-actions:empty {display: none;}
+.qp-button {
+  appearance: none; border: 1.5px solid transparent; display: inline-flex; align-items: center; justify-content: center;
+  gap: .45em; padding: .52em .8em; min-height: 39px; border-radius: 13px 16px 13px 15px;
+  font-size: clamp(15px, 1.25vw, 20px)!important; line-height: 1.15!important; text-align: center;
+}
+.qp-primary {background: var(--qp-warm); color: #192d36; font-weight: 700!important; box-shadow: 0 3px #080e1a77;}
+.qp-primary:enabled:hover {background: #fff1be;}
+.qp-primary:disabled {color: #c4d0d8; background: #425064; box-shadow: none;}
+.qp-subtle, .qp-home-link {background: transparent; color: #edf2ec; border-color: #6c7d8e;}
+.qp-subtle:hover:enabled, .qp-home-link:hover {background: #344557;}
+.qp-subtle:disabled {opacity: .45;}
+.qp-home-link {padding: .38em .7em; min-height: 36px;}
+.qp-resources {display: flex; align-items: flex-start; flex-wrap: wrap; column-gap: 20px; row-gap: 3px;}
+.qp-disclosure {font-size: clamp(15px, 1.17vw, 20px); min-width: 0; color: var(--qp-muted);}
+.qp-disclosure summary {list-style: none; display: inline-flex; gap: 6px; align-items: center; color: #dbe5ea; min-height: 34px;}
+.qp-disclosure summary::-webkit-details-marker {display: none;}
+.qp-disclosure summary:hover {color: var(--qp-tint);}
+.qp-disclosure summary::after {content: '▾'; color: var(--qp-tint); font-size: .8em;}
+.qp-disclosure[open] {flex: 1 0 100%;}
+.qp-disclosure[open] summary::after {transform: rotate(180deg);}
+.qp-disclosure p {margin-top: 2px; border-left: 2px solid var(--qp-rim); padding: .28em .75em; line-height: 1.38;}
+.qp-stage .qp-review-picks {display: grid; gap: 6px;}
+.qp-review-pick {display: flex; align-items: baseline; gap: 10px; font-size: clamp(15px, 1.3vw, 22px); line-height: 1.25; color: #dce5ea;}
+.qp-review-pick b {color: var(--qp-tint);}
+.qp-outcome {padding: .9em 1.08em; background: #26394a; border-left: 4px solid var(--qp-tint); border-radius: 0 16px 16px 0;}
+.qp-outcome h4, .qp-transfer h4 {font-size: clamp(18px, 1.5vw, 26px); line-height: 1.22; color: var(--qp-tint);}
+.qp-outcome p, .qp-transfer p, .qp-stage .qp-discussion {font-size: clamp(17px, 1.55vw, 26px); line-height: 1.36; margin-top: .3em;}
+.qp-discussion {color: #d5e4e7;}
+.qp-finished .qp-content {align-self: center;}
+.qp-victory-mark {display: flex; align-items: center; gap: .5em; color: var(--qp-tint); font-size: clamp(18px, 1.6vw, 26px);}
+.qp-victory-mark svg {padding: 3px; width: 1.6em; height: 1.6em; border: 2px solid; border-radius: 50%;}
+.qp-finished .qp-heading {font-size: clamp(38px, 4.6vw, 78px);}
+.qp-stage .qp-rule {color: #ffdf98; display: flex; align-items: center; gap: .5em; font-size: clamp(19px, 1.8vw, 31px);}
+.qp-transfer {margin-block: .4em; padding-top: 1.1em; border-top: 1px solid #546575;}
+@container (max-width: 800px) {
+  .qp-main {gap: 22px; grid-template-columns: minmax(0,.86fr) minmax(0,1.14fr);}
+  .qp-setup {font-size: 17px;}
+  .qp-actions {gap: 7px;}
+}
+@container (max-width: 630px) {
+  .qp-main {display: flex; flex-direction: column; align-items: stretch; gap: 16px;}
+  .qp-image {position: relative; top: auto;}
+  .qp-scene-art {border-radius: 10px; max-height: none;}
+  .qp-caption {padding: 9px 0 0; gap: 12px; flex-direction: row; align-items: baseline; flex-wrap: wrap;}
+  .qp-stage .qp-place {font-size: clamp(24px, 5.7vw, 34px);}
+  .qp-stage .qp-heading {font-size: clamp(25px, 6vw, 34px);}
+  .qp-content {gap: 12px; padding: 0;}
+  .qp-top {padding-bottom: 14px;}
+  .qp-format-tag {gap: 6px;}
+  .qp-format-tag svg {width: 21px; height: 21px;}
+  .qp-home-link {font-size: 14px!important;}
+  .qp-finished .qp-content {align-self: stretch;}
+}
+@media (prefers-reduced-motion: reduce) {
+  .qp-stage *, .qp-stage *::before, .qp-stage *::after {scroll-behavior: auto; animation-duration: .01ms!important; transition-duration: .01ms!important;}
+  .qp-card:hover:enabled {transform: none;}
+}
+
+.studio-inner{flex-wrap:wrap}
+.walk-link{display:inline-block;color:#f0edf4;text-decoration:none;white-space:nowrap;border:1px solid #52596f;border-radius:8px;padding:8px 11px}
+.walk-link:hover,.walk-link:focus-visible{background:#30364a}
+.walk-link:focus-visible{outline:3px solid #82e3ff;outline-offset:3px}
+@media(max-width:650px){.walk-link{font-size:13px;padding:7px 8px}}
+</style><style id="rule-book-css">#overlay.rules-book, #overlay.rule-detail {
+  --rule-ink: #233f36;
+  --rule-forest: #33583c;
+  color: var(--rule-ink);
+  background: #fff9ea;
+  border: 2px solid #d6c497;
+  border-radius: 24px;
+}
+#overlay.rules-book { width: min(1040px, calc(100% - 32px)); }
+#overlay.rule-detail { width: min(570px, calc(100% - 28px)); }
+.rules-book #sheet,.rule-detail #sheet { padding: clamp(18px, 2.6vw, 34px); }
+.rules-book h2, .rule-detail h2 { color: var(--rule-forest); }
+#overlay-title[tabindex="-1"]:focus {outline: none}
+.rules-book .sheet-close,.rule-detail .sheet-close {
+  color: #43523c; background: #f7edda; border-color: #cebf9e; font-size: 1.5rem;
+}
+.rule-layout {display:grid;grid-template-columns:minmax(0,1.65fr) minmax(220px,1fr);gap:clamp(16px,2vw,32px);margin-top:20px;align-items:start}
+.rule-list {margin:0;padding:0;list-style:none;display:grid;gap:7px}
+.rule-entry {width:100%;display:flex;align-items:center;gap:12px;text-align:left;border:1px solid #e1d4b6;background:#fffcf4;color:inherit;border-radius:13px;padding:10px 13px}
+.rule-entry:hover,.rule-entry:focus-visible {background:#fff2c8;border-color:#b79c58}
+.rule-copy {display:grid;gap:3px;flex:1}
+.rule-copy strong {font-size:clamp(1.12rem,1.6vw,1.38rem);color:#33583c;line-height:1.15}
+.rule-copy>span {font-size:1.05rem;line-height:1.3}
+.rule-more {color:#736646;font-size:1.5rem}
+.rule-emblem {width:2.55rem;height:2.55rem;display:inline-grid;place-items:center;flex:none;border-radius:50%;background:#fae3ac;color:#805221;font-size:1.42rem}
+.rule-emblem[data-ink="1"]{background:#e4ead4}
+.rule-emblem[data-ink="2"]{background:#f7dcce;color:#994935}
+.rule-emblem[data-ink="3"]{background:#dfebdc}
+.rule-emblem[data-ink="4"]{background:#f7e5af}
+.rule-day {padding:clamp(16px,2vw,25px);border-radius:16px;background:#e6efdb}
+.rule-day h3,.rule-example h3,.rule-day h4 {margin:0;color:var(--rule-forest);line-height:1.2}
+.rule-day h3 {font-size:1.48rem}
+.rule-day p,.rule-example p {margin:8px 0 0;font-size:1.1rem;line-height:1.41}
+.rule-day-example {margin-top:18px;border-top:1px solid #b7c7a7;padding-top:16px}
+.rule-day h4,.rule-example h3 {font-size:1.16rem}
+.rule-stars {display:block;color:#8a5c0e;font-size:1.65rem;letter-spacing:3px;margin:6px 0;line-height:1.1}
+.rule-stars span {color:#686746}
+.rule-detail #overlay-title {font-size:clamp(1.66rem,3.2vw,2.32rem);display:flex;align-items:center;gap:12px}
+.rule-detail .rule-meaning {font-size:clamp(1.22rem,2.1vw,1.5rem);line-height:1.38;margin:18px 0}
+.rule-example {background:#f5ecd6;border-radius:14px;padding:16px 18px}
+.rule-example p {font-size:1.18rem}
+.rule-actions {margin-top:22px;display:flex;gap:10px;flex-wrap:wrap}
+.rule-actions .launch,.rule-related {font:inherit;font-weight:700;border-radius:12px;padding:10px 16px;margin:0;text-decoration:none}
+.rule-actions .launch {background:#385f41;color:#fffdf5;border:1px solid #385f41}
+.rule-related {background:transparent;color:#31533d;border:1px solid #a9b99a}
+.rule-actions button:hover {filter:brightness(.93)}
+@media(max-width:720px){.rule-layout{grid-template-columns:1fr}.rule-day{margin-top:2px}.rule-entry{padding:9px 10px;gap:9px}}
+@media(max-width:450px){.rule-entry .rule-emblem{width:2.1rem;height:2.1rem;font-size:1.15rem}.rule-copy>span{font-size:1rem}.rule-detail #overlay-title{gap:7px}}
+</style></head>
+<body>
+<header class="studio" id="studio">
+  <nav class="studio-inner" aria-label="Управление показом">
+    <span class="studio-name">Искорка <small>Студия показа</small></span>
+    <div id="theme-list" class="theme-list" role="group" aria-label="Главные экраны"></div>
+    <a class="walk-link" href="./walk-v8.5/">Прогулка по дням</a>
+    <button id="rules-open" class="studio-btn">Правила класса</button>
+    <button id="catalog-open" class="studio-btn">Остановки и загадки</button>
+    <button id="compare-open" class="studio-btn">Было / стало</button>
+    <button id="present" class="studio-btn present" aria-label="На весь экран" title="На весь экран">⛶</button>
+  </nav>
+</header>
+<button type="button" id="present-exit" hidden>↩ К показу</button>
+<main id="stage" tabindex="-1" aria-label="Игра Искорки"></main>
+<dialog id="overlay" aria-labelledby="overlay-title"><div id="sheet"></div></dialog>
+<script type="application/json" id="payload">{"stops":[{"id":"welcome","step":4,"place":"Следы на снегу","item":null,"before":null,"rule":"Играем дружно","scene":"Искорка нашла следы. Поможем ей узнать, куда они ведут?","payoff":"Тропинка найдена!","detect":{"setup":"Искорка нашла след у своей лапы. Дальше на снегу видны ещё следы.","ask":"Что подскажет, куда ведут следы?","clues":[{"label":"От лапы Искорки следы тянутся влево","icon":"🐾"},{"label":"У тропинки краснеют ягоды","icon":"🌿"},{"label":"За поворотом виден мостик","icon":"🌉"}],"key":[0,2],"hint":"Начни у лапы Искорки. Проведи пальцем по следам. Что видно впереди?","why":"От лапы Искорки следы тянутся влево, в сторону мостика. Один из вас может показать поворот, другой — мостик.","missingHints":{"0":"Мостик виден издалека. Как по следам узнать, что они ведут в его сторону?","2":"Поворот найден. Проследи глазами чуть дальше. Что там видно над ручьём?"}},"fork":{"setup":"Ты уже знаешь, куда ведут следы. Друг ещё ищет и просит подсказку.","ask":"Как помочь другу самому найти ответ?","plans":[{"label":"Показать след у лапы Искорки","icon":"🐾","result":"Друг начал с этого следа, сам заметил поворот и показал мостик."},{"label":"Подсказать, где следы поворачивают","icon":"👈","result":"«Посмотри на поворот слева от Искорки!» Друг посмотрел дальше поворота и нашёл мостик."}],"talk":"Какую подсказку ты выберешь, если друг уже нашёл первый след?"},"direct":{"setup":"Покажите Искорке путь вдвоём. Один ведёт пальцем до поворота. Там ход переходит к другу.","ask":"Как вместе показать всю дорожку?","beats":[{"label":"Найти след у лапы Искорки","icon":"🐾"},{"label":"Провести пальцем до поворота","icon":"☝️"},{"label":"Друг покажет путь от поворота до мостика","icon":"🌉"}],"hint":"Найди начало возле Искорки. Где второй игрок подхватит дорожку?","why":"От лапы Искорки первый игрок показал путь до поворота. Там его сменил второй и довёл пальцем до мостика.","orderHints":["Откуда вести пальцем? Найди след у лапы Искорки и начни с него.","Второй игрок начнёт на повороте. Кто покажет первую часть дорожки до поворота?"],"alternate":"Первый игрок начинает у лапы Искорки. На повороте начинается ход второго."},"transfer":"Вы собираете пазл вдвоём. Как подсказать другу, где искать деталь, и дать ему найти её самому?"},{"id":"lantern","step":15,"place":"Мостик","item":"Фонарик","rule":"Идём спокойно","before":"Как Искорке попасть на другой берег?","scene":"У мостика Искорка нашла фонарик. Через ручей ведёт узкая дорожка.","detect":{"setup":"Середина мостика покрыта льдом. Искорка ищет дорожку, по которой зверёк прошёл пешком.","ask":"По каким доскам прошёл зверёк?","clues":[{"label":"Доски у перил сухие","icon":"🪵"},{"label":"На льду две полоски от санок","icon":"🛷"},{"label":"Следы лап тянутся вдоль перил","icon":"🐾"}],"key":[0,2],"hint":"Найди следы лап. Что у зверька было под лапами?","why":"Следы лап идут по сухим доскам у перил. Две полоски на льду оставили санки.","missingHints":{"0":"Следы лап показывают путь. Чем эти доски отличаются от середины мостика?","2":"Полоски оставили санки. А где видны следы того, кто шёл пешком?"}},"fork":{"setup":"«Крот, подожди!» Искорка осветила сухие доски. Вдвоём на узком мостике не разойтись.","ask":"Как перейти мостик по одному?","plans":[{"label":"Посветить Кроту и пропустить его","icon":"🔦","result":"Искорка осталась на берегу и осветила сухие доски. Крот прошёл с санками. Теперь её очередь."},{"label":"Договориться, что Искорка пойдёт первой","icon":"✋","result":"Крот кивнул и остался с санками. Искорка прошла к нему по сухим доскам. Теперь она освещает дорогу Кроту."}],"talk":"Как Кроту и Искорке понять, что они договорились?"},"direct":{"setup":"Крот вот-вот шагнёт с санками на лёд. На другом берегу Искорка с фонариком.","ask":"Как Искорке помочь Кроту перейти мостик?","beats":[{"label":"Сказать Кроту: «Подожди!»","icon":"✋"},{"label":"Осветить фонариком сухие доски","icon":"🔦"},{"label":"Позвать Крота пройти по сухим доскам","icon":"🐾"}],"hint":"Крот вот-вот ступит на лёд. Что ему важно услышать прямо сейчас?","why":"«Подожди!» Крот остановился. Искорка осветила сухие доски у перил. «Теперь иди сюда, по сухим доскам!» Крот перешёл мостик с санками.","orderHints":["Крот может ступить на лёд, пока Искорка ищет сухие доски. Что ей сказать сразу?","Если позвать Крота сейчас, он ещё не увидит сухие доски. Что сделать с фонариком?"],"alternate":"Крот вот-вот ступит на лёд. Что ему важно услышать прямо сейчас?"},"transfer":"За поворотом в коридоре лужа. Друг её ещё не видит. Как ему помочь?","itemUse":"В темноте фонарик освещает дорогу."},{"id":"compass","step":29,"place":"Развилка","item":"Компас","rule":"Говорим негромко","before":"Как расслышать тихий звон?","scene":"Перед Искоркой две тропинки. У неё есть карта и компас.","detect":{"setup":"На ходу Искорка слышит два звона. Один идёт от застёжки рюкзака. Другой — от колокольчика.","ask":"У какой тропинки звенит колокольчик?","clues":[{"label":"Стрелка компаса показывает север","icon":"🧭"},{"label":"Искорка встала. Застёжка стихла","icon":"🎒"},{"label":"После остановки справа ещё звенит","icon":"🔔"}],"key":[1,2],"hint":"Сравни, что слышно на ходу и во время остановки.","why":"Искорка остановилась, и застёжка стихла. Справа ещё звенело. Там, у правой тропинки, и висит колокольчик.","missingHints":{"1":"Компас показывает север. Что случилось со звоном застёжки, когда Искорка остановилась?","2":"Застёжка стихла. С какой стороны всё ещё доносится звон?"}},"fork":{"setup":"На развилке шумит ветер. Из-за веток Искорке плохо видно колокольчик. Нужно расслышать его звон.","ask":"Как узнать, откуда звенит?","plans":[{"label":"Подождать, пока ветер стихнет","icon":"👂","result":"Искорка дождалась тишины. Дзинь! Теперь хорошо слышно, что звенит у правой тропинки."},{"label":"Послушать у каждого указателя","icon":"🪧","result":"У левого указателя Искорка едва слышала звон. У правого он стал громче. Колокольчик ближе к правой тропинке."}],"talk":"А если ветер всё дует и дует? Какой ход попробуешь?"},"direct":{"setup":"На карте отмечен колокольчик. Искорка хочет проверить, оттуда ли доносится звон. На ходу звякает застёжка.","ask":"Как проверить звон по карте?","beats":[{"label":"Остановиться, чтобы застёжка стихла","icon":"✋"},{"label":"Послушать, с какой стороны звенит","icon":"👂"},{"label":"Показать на карте, откуда слышен звон","icon":"🗺️"}],"hint":"Как убрать лишний звон, чтобы услышать колокольчик?","why":"Искорка остановилась. Застёжка стихла, а справа ещё звенело. Искорка показала правую тропинку на карте. Там и нарисован колокольчик!","orderHints":["На ходу звякает застёжка. Как услышать один колокольчик?","На карте уже есть рисунок. А как проверить на слух, с какой стороны звон?"],"alternate":"Как убрать лишний звон, чтобы услышать колокольчик?"},"transfer":"Несколько ребят заговорили разом. Как помочь классу услышать того, кто начал рассказывать?","itemUse":"Стрелка компаса показывает, где север."},{"id":"rope","step":40,"place":"Пенёк на тропе","item":"Верёвка","rule":"Идём спокойно","before":"Что сделать с рюкзаком перед дорогой?","scene":"У пенька Искорка остановилась и сняла рюкзак.","detect":{"setup":"Рядом со следами Искорки появилась длинная черта. Лисичка оглянулась на свой рюкзак.","ask":"Что прочертило снег за Искоркой?","clues":[{"label":"Из рюкзака свисает верёвка","icon":"🎒"},{"label":"Конец верёвки лежит прямо в бороздке","icon":"🧶"},{"label":"Поперёк тропы идут следы птицы","icon":"🐦"}],"key":[0,1],"hint":"Посмотри, где заканчивается длинная черта.","why":"Верёвка выскользнула из рюкзака. Её конец волочился по снегу и оставил длинную черту. Следы птицы идут поперёк.","missingHints":{"0":"Чья это верёвка? Посмотри, откуда тянется её верхний конец.","1":"Птичьи следы короткие. Какой предмет касается снега там, где заканчивается длинная черта?"}},"fork":{"setup":"В чехле у Искорки карта. Впереди густые ветки, а карту скоро понадобится достать.","ask":"Где удобнее нести чехол?","plans":[{"label":"Привязать чехол к лямке рюкзака","icon":"🪢","result":"У развилки Искорка сразу достала карту. Среди веток ей пришлось придержать чехол, чтобы он не зацепился."},{"label":"Положить чехол внутрь рюкзака","icon":"🎒","result":"Ветки скользнули мимо рюкзака. У развилки Искорка остановилась, сняла рюкзак и достала карту."}],"talk":"Куда бы ты положил карту перед густыми ветками? Почему?"},"direct":{"setup":"Длинная верёвка волочится по снегу. Искорка хочет убрать её так, чтобы потом легко развернуть.","ask":"Как сложить верёвку без путаницы?","beats":[{"label":"Свернуть верёвку кольцами","icon":"🌀"},{"label":"Обмотать кольца свободным концом","icon":"🪢"},{"label":"Положить свёрток в рюкзак","icon":"🎒"}],"hint":"Представь, что верёвка у тебя в лапках. Что будешь обматывать её концом?","why":"Искорка свернула верёвку и обмотала кольца концом. Свёрток поместился в рюкзак, а кольца остались вместе.","orderHints":["Чтобы обмотать кольца, их надо сначала сделать. Как свернуть длинную верёвку?","В рюкзаке кольца могут распасться. Чем скрепить их перед дорогой?"],"alternate":"Представь, что верёвка у тебя в лапках. Что будешь обматывать её концом?"},"transfer":"У друга на ходу из портфеля тянется шарф. Как помочь ему, пока он не наступил на шарф?","itemUse":"Верёвкой можно привязать нужные вещи к рюкзаку."},{"id":"thermos","step":50,"place":"Лагерь у костра","item":"Термос","rule":"Бережём друг друга","before":"Как помочь Бельчонку согреться?","scene":"У костра друзья устроили привал. На пеньке стоит термос.","detect":{"setup":"За чаем собрались трое друзей. Искорка поставила две кружки. Бельчонок нашёл способ напоить всех сразу.","ask":"Из чего будет пить третий друг?","clues":[{"label":"На пеньке лежит карта","icon":"🗺️"},{"label":"Сверху у термоса съёмная крышка","icon":"🫙"},{"label":"Крышка глубокая, как кружка","icon":"☕"}],"key":[1,2],"hint":"Посмотри на крышку. Что получится, если снять и перевернуть её?","why":"Бельчонок снял глубокую крышку и перевернул её. Получилась третья кружка. Каждому досталась своя.","missingHints":{"1":"Карта подскажет дорогу. А какую часть термоса можно снять?","2":"Крышку можно снять. Чем она похожа на кружку?"}},"fork":{"setup":"Бельчонок мёрзнет даже в шарфе. Ёжик ещё в пути. В термосе тёплого чая хватит на троих.","ask":"Как помочь Бельчонку прямо сейчас?","plans":[{"label":"Предложить чашку тёплого чая","icon":"☕","result":"Бельчонок захотел чаю. Искорка налила ему и закрыла термос. Когда Ёжик пришёл, его чай был тёплым."},{"label":"Позвать его сесть рядом за ветром","icon":"🧣","result":"За пеньком не дуло. Бельчонок сел рядом с Искоркой и согрел лапки под шарфом. Когда пришёл Ёжик, друзья налили чай."}],"talk":"Бельчонок говорит: «Пить пока не хочу». Что ещё ему предложить?"},"direct":{"setup":"Ветер поднял край салфетки. Бельчонок держит термос. Чтобы достать кружки из рюкзака, Искорке нужны обе лапы.","ask":"Как удержать салфетку и достать кружки?","beats":[{"label":"Поймать салфетку за край","icon":"🖐️"},{"label":"Попросить Бельчонка прижать край термосом","icon":"🫙"},{"label":"Достать кружки из рюкзака","icon":"🎒"}],"hint":"Что улетит, пока Искорка будет искать кружки?","why":"Искорка поймала салфетку. Бельчонок поставил термос на край. Теперь лапки свободны! Искорка достала кружки и поставила их на салфетку.","orderHints":["Ветер уже поднял край. Придержи салфетку, чтобы Бельчонок успел поставить термос.","Для кружек нужны обе лапки. Кто подержит салфетку, пока Искорка ищет кружки?"],"alternate":"Что улетит, пока Искорка будет искать кружки?"},"transfer":"На перемене друг отошёл от игры и сел один. Как узнать, какая помощь ему нужна?","itemUse":"В термосе чай долго остаётся тёплым."},{"id":"shovel","step":62,"place":"Заснеженная тропа","item":"Лопатка","rule":"Бережём друг друга","before":"Как расчистить снег вдвоём?","scene":"У заснеженного поворота Искорке и Бельчонку пригодится лопатка.","detect":{"setup":"Санки легко ехали по прямой, а потом застряли. Друзья хотят расчистить только то место, где тесно.","ask":"Где расширить дорожку для санок?","clues":[{"label":"На прямой видны две ровные полоски","icon":"🛷"},{"label":"Рядом мелкие следы лап","icon":"🐾"},{"label":"На повороте край санок упёрся в сугроб","icon":"❄️"}],"key":[0,2],"hint":"Проследи путь санок. Где им хватало места, а где они застряли?","why":"По прямой санки ехали свободно. На повороте край санок задел сугроб. Друзья расширили поворот лопаткой.","missingHints":{"0":"Мелкие следы оставил зверёк. А как видно, что санки ехали по прямой?","2":"Две полоски показывают, откуда приехали санки. Где снег остановил их?"}},"fork":{"setup":"Мышке хватит узкой дорожки. Ёжику с санками нужен широкий поворот. Снег копают одной лопаткой.","ask":"Как расчистить дорожку для обоих?","plans":[{"label":"Сделать узкую тропку и расширить","icon":"🐭","result":"Мышка сразу пробежала по узкой тропке. Пока Ёжик ждал, друзья вернулись к повороту и расширили его для санок."},{"label":"Сразу копать по ширине санок","icon":"🛷","result":"Мышке пришлось дольше ждать. Зато когда друзья закончили, и она, и Ёжик с санками смогли пройти."}],"talk":"А если у Мышки замёрзли лапки и ей пора в норку? Какой ход ей поможет?"},"direct":{"setup":"У поворота вход в норку. Бельчонок с лопаткой его не заметил. Искорка покажет, где можно сложить снег.","ask":"Как расчистить поворот и сберечь норку?","beats":[{"label":"Показать вход и отметить его веточками","icon":"🌿"},{"label":"Отгрести снег в сторону от входа","icon":"❄️"},{"label":"Проверить поворот пустыми санками","icon":"🛷"}],"hint":"Куда смотрит Искорка? Что Бельчонку важно увидеть до первого взмаха лопаткой?","why":"Искорка отметила вход. Бельчонок отгрёб снег в другую сторону. Пустые санки легко повернули, а вход остался свободным.","orderHints":["Бельчонок ещё не заметил норку. Как показать ему, куда снег попадать не должен?","Санки застревают на повороте. Что нужно изменить перед новой пробой?"],"alternate":"Куда смотрит Искорка? Что Бельчонку важно увидеть до первого взмаха лопаткой?"},"transfer":"Между стульями ты проходишь, а друг с коробкой застрял. Как освободить ему путь?","itemUse":"Лопаткой можно убрать снег с тропы."},{"id":"crystal","step":75,"place":"У ледяной пещеры","item":"Кристалл","rule":"Играем дружно","before":"Как достать звезду и дать каждому поиграть?","scene":"У пещеры друзья нашли кристалл. Если посветить на него, на льду появится узор.","detect":{"setup":"Искорка придумала загадку из света. Бельчонок видит почти весь узор. В последнем окошке фигурка спрятана.","ask":"Что спрятано в последнем окошке?","clues":[{"label":"Звёздочка и ромбик идут по очереди","icon":"✨"},{"label":"Перед окошком сияет ромбик","icon":"🔷"},{"label":"Фонарик держит Искорка","icon":"🔦"}],"key":[0,1],"hint":"Назови фигурки слева направо. Какие две всё время повторяются?","why":"Звёздочка, ромбик, звёздочка, ромбик… Следом появится звёздочка! Бельчонок угадал. Теперь он сам загадает узор Искорке.","missingHints":{"0":"Кто держит фонарик, мы знаем. В каком порядке на стене идут фигурки?","1":"Ты нашёл пару, которая повторяется. Какая фигурка стоит прямо перед пустым окошком?"}},"fork":{"setup":"У Искорки и Бельчонка один фонарик и один кристалл. Оба хотят придумать загадку из света.","ask":"Как поделить фонарик для игры с узором?","plans":[{"label":"Меняться после каждой загадки","icon":"🔄","result":"Бельчонок загадал первый узор, а Искорка угадала. Потом они поменялись. У каждого была своя загадка."},{"label":"Вместе придумать по половинке узора","icon":"🤝","result":"Искорка осветила кристалл и выбрала первую фигурку. Затем передала фонарик Бельчонку. Он выбрал вторую. Получился их общий узор."}],"talk":"Какой ход выбрать, если Бельчонок хочет сам загадать целую загадку?"},"direct":{"setup":"Теперь загадывает Бельчонок. Он покажет начало узора. Последнюю фигурку Искорка попробует угадать.","ask":"Как сыграть и сохранить ответ в секрете?","beats":[{"label":"Бельчонок показывает начало узора","icon":"🔦"},{"label":"Искорка называет следующую фигурку","icon":"💬"},{"label":"Бельчонок открывает спрятанную фигурку","icon":"✨"}],"hint":"Когда Искорка уже видит подсказку, но ещё может угадать сама?","why":"Бельчонок показал звёздочку, ромбик и ещё одну звёздочку. «Дальше ромбик!» — сказала Искорка. Бельчонок открыл ответ. Точно!","orderHints":["Пока фигурок не видно, Искорка может только гадать. Что ей нужно увидеть?","Если ответ уже открыт, загадка пропала. Дай Искорке время назвать свою догадку."],"alternate":"Когда Искорка уже видит подсказку, но ещё может угадать сама?"},"transfer":"В игре загадки придумывает всегда один и тот же человек. Как дать другим ребятам попробовать?","itemUse":"Кристалл нужен, чтобы зажечь Маяк."},{"id":"lighthouse","step":100,"place":"Маяк звёзд","item":"Огонёк Маяка","rule":"По звонку готовимся к уроку","before":"Что сделаем, если после огонька прозвенит школьный звонок?","scene":"У Маяка звенит колокольчик. Пора прервать игру и зажечь свет.","detect":{"setup":"Друзья кладут камешки по очереди. Шишка у портрета показывает, чей ход. Звонок! Игру продолжат позже.","ask":"Что нужно запомнить перед перерывом?","clues":[{"label":"Какая завязка у мешочка","icon":"🪢"},{"label":"Как лежат камешки в узоре","icon":"🔵"},{"label":"У чьего портрета лежит шишка","icon":"🐿️"}],"key":[1,2],"hint":"Друзья уберут игру. Что поможет сложить тот же узор и вспомнить, кто ходит?","why":"Друзья зарисовали узор и поставили точку у портрета Бельчонка. Потом они разложат камешки так же, и Бельчонок сделает свой ход.","missingHints":{"1":"Шишка напоминает, кто ходит. А что нужно запомнить, прежде чем собрать камешки?","2":"Рисунок поможет сложить узор. Что показывает, кому класть следующий камешек?"}},"fork":{"setup":"Звонок прервал игру. На столе нужно развернуть карту. На подносе остался узор из камешков.","ask":"Как освободить стол и сохранить узор?","plans":[{"label":"Перенести поднос на полку","icon":"📦","result":"Друзья перенесли поднос ровно. Камешки остались на своих местах. После перерыва можно сразу играть."},{"label":"Зарисовать узор и собрать камешки","icon":"✏️","result":"Друзья убрали камешки в мешочек. Он занял мало места. После перерыва они снова сложат узор по рисунку."}],"talk":"А если поднос не помещается на полке? Какой ход подойдёт?"},"direct":{"setup":"Звонок! Друзья отложили игру. Кристалл в мешочке у края коврика. На стене Маяка выемка в форме звёздочки.","ask":"Как вернуть Маяку свет?","beats":[{"label":"Достать кристалл из мешочка","icon":"💎"},{"label":"Повернуть кристалл по форме звёздочки","icon":"⭐"},{"label":"Вставить кристалл в выемку на стене","icon":"🌟"}],"hint":"Посмотри на стену. Что нужно повернуть в лапках, чтобы лучики совпали?","why":"Искорка достала кристалл. Бельчонок показал, как совпадут лучики. Искорка вставила кристалл в звёздочку на стене. Маяк зажёгся!","orderHints":["Пока кристалл в мешочке, его лучиков не видно. Как взять его в лапки?","Посмотри на форму выемки. Как повернуть кристалл, чтобы он вошёл?"],"alternate":"Посмотри на стену. Что нужно повернуть в лапках, чтобы лучики совпали?"},"transfer":"Звонок прервал вашу настольную игру. Как оставить её, чтобы после урока продолжить с того же места?","itemUse":"Кристалл вернёт Маяку свет."}],"captions":{"welcome":["Куда ведут следы от лапы Искорки?","Как дать другу подсказку и оставить ему загадку?","Как вдвоём показать весь путь по следам?"],"lantern":["Где на мостике прошёл зверёк?","Как Кроту и Искорке перейти узкий мостик по одному?","Крот вот-вот шагнёт на лёд. Как ему помочь?"],"compass":["Как отличить колокольчик от звона рюкзака?","У какой тропинки звенит колокольчик?","Совпадает ли звон с рисунком на карте?"],"rope":["Откуда взялась длинная черта за Искоркой?","Где нести чехол с картой перед густыми ветками?","Как убрать верёвку, чтобы потом легко развернуть?"],"thermos":["Три друга и две кружки. Где взять третью?","Как согреть Бельчонка, пока Ёжик в пути?","Как достать кружки, пока ветер сдувает салфетку?"],"shovel":["В каком месте санкам тесно?","Как Мышке и санкам пройти по одной дорожке?","Как расчистить поворот и сохранить вход в норку?"],"crystal":["Какая фигурка спряталась в конце узора?","Как двум друзьям придумать узор с одним фонариком?","Когда назвать догадку и когда показать ответ?"],"lighthouse":["Как сохранить узор и запомнить, чей ход?","Как освободить стол для карты и сохранить игру?","Как поставить кристалл на место и зажечь Маяк?"]},"pictureNotes":{"welcome":["У лапы Искорки виден след. На снегу цепочка отпечатков уходит влево, к мостику. У тропинки растут красные ягоды.","Искорка склонилась над отпечатком лапы. Впереди видны поворот тропинки и мостик над ручьём.","У лапы Искорки крупный отпечаток. Слева от Искорки цепочка следов изгибается. Вдали деревянный мостик."],"lantern":["Фонарик освещает сухие доски со следами лап у перил. На льду видны две полоски от санок.","Искорка с фонариком и Крот с санками стоят у разных концов узкого мостика. Посередине блестит лёд.","Искорка поднимает лапку, глядя на Крота с санками. Между ними лёд, по краям видны доски."],"compass":["Рядом с Искоркой рюкзак с застёжкой. Справа над тропинкой висит колокольчик.","Искорка между двумя указателями. Слева ветер качает ветку с шишкой, справа на ветке колокольчик.","Искорка с карандашом смотрит на карту. На ней показаны две тропинки, шишка и колокольчик. Рядом компас."],"rope":["Из рюкзака тянется верёвка. Её конец лежит в длинной бороздке рядом с отпечатками лап.","У заснеженных веток Искорка держит чехол с петлёй. За спиной у неё рюкзак.","Длинная верёвка лежит на пеньке. Рядом с Искоркой открыт рюкзак."],"thermos":["У пенька Искорка, Бельчонок и Ёжик. Перед ними две металлические кружки. Сверху на зелёном термосе похожая на них крышка.","Бельчонок уже в красном шарфе. Искорка рядом с ним на скамейке, Ёжик ещё на тропе. Термос закрыт.","Ветер поднимает край салфетки с пенька. У Бельчонка в лапах термос, Искорка открывает рюкзак."],"shovel":["Следы от санок идут по прямой и загибаются к сугробу. Там друзья остановились с лопаткой.","Мышка слева от друзей, Ёжик с широкими санками справа. У Бельчонка одна лопатка.","Искорка указывает на вход под корнями дерева. Рядом две веточки, лопатка Бельчонка и пустые санки."],"crystal":["У кристалла друзья и фонарик. На табличке звёздочка, ромбик, звёздочка, ромбик и пустое окошко с вопросом.","Искорка и Бельчонок сидят по обе стороны от одного кристалла. Между ними фонарик.","Бельчонок с кристаллом и фонариком показывает Искорке узор. На льду три фигурки и пустое окошко."],"lighthouse":["На листе лежат цветные камешки. Рядом два портрета игроков. Шишка лежит у портрета Бельчонка.","На столе поднос с узором, раскрытая карта, карандаш и мешочек. Друзья услышали звонок.","На коврике разложены камешки. У края коврика виден кристалл. На стене за Бельчонком пустая звёздочка."]},"rules":["Идём спокойно","Говорим негромко","Бережём друг друга","Играем дружно","По звонку готовимся к уроку"],"assets":{"gear0":"./assets/7289425fa3fac3e96c13.webp","gear1":"./assets/83ab96bde47ec333ed8d.webp","gear2":"./assets/6431d8606810ec338412.webp","gear3":"./assets/fbf112173429bc658416.webp","gear4":"./assets/20e7c2bbd09ba6a65adc.webp","gear5":"./assets/a3189c00ea79dbae14c6.webp","pass":"./assets/bc74eb9c102e08351c26.webp","theater":"./assets/3833f9017e46d71e2fc9.webp","walk":"./assets/40fce4e1143d5ee561a0.wav","still":"./assets/a3fb6e049c465b0d7c0b.wav","glade":"./assets/0be06982eb15c89fba25.webp","iskorka":"./assets/dc07007c5f05da97d547.webp"},"scenes":{"lantern":{"detect":"./assets/f4939ab144d9b062434a.webp","fork":"./assets/06d456ca47625757bbae.webp","direct":"./assets/1ef1b8a523908a42b05e.webp","after":"./assets/f6dd0510346275c73ca2.webp"},"compass":{"detect":"./assets/14d1e1a43a64cc48e884.webp","fork":"./assets/a791de918d0da311c6f1.webp","direct":"./assets/1fb55ce1501bcd79e1d9.webp","after":"./assets/9016c1ce4d4512c15dd6.webp"},"rope":{"detect":"./assets/261cd34c2fe95460c098.webp","fork":"./assets/ed63ee9ad4fcabb1de7b.webp","direct":"./assets/7a7c01f3f67c1695163d.webp","after":"./assets/cc512845a6329ca92f9a.webp"},"thermos":{"detect":"./assets/8ba8b49911100e1c7870.webp","fork":"./assets/8ce93c097c1f55e822c6.webp","direct":"./assets/d3671e4da1748bf79816.webp","after":"./assets/439689d7831f87a7cdc3.webp"},"shovel":{"detect":"./assets/13d165d6b7b2cecf80d3.webp","fork":"./assets/ab417bb2b6fa3606e6bd.webp","direct":"./assets/b3f4d22b5d2f1282daec.webp","after":"./assets/37d3db27a94ea0c5a228.webp"},"crystal":{"detect":"./assets/94378d6c8d238bc737f2.webp","fork":"./assets/23941982a19765e323f4.webp","direct":"./assets/e0bd18202f012f771cb2.webp","after":"./assets/43fed8d686653ab2acda.webp"},"lighthouse":{"detect":"./assets/742e986e538a7b4747ae.webp","fork":"./assets/664705fabb4392647c25.webp","direct":"./assets/abedbc180cdcfb933aad.webp","after":"./assets/89d5b69c7bae2dabbf2d.webp"},"welcome":{"detect":"./assets/af758b5b8f8f70bb11cc.webp","fork":"./assets/af758b5b8f8f70bb11cc.webp","direct":"./assets/af758b5b8f8f70bb11cc.webp","after":"./assets/af758b5b8f8f70bb11cc.webp"}},"itemCopy":{"lantern":"В темноте фонарик освещает дорогу.","compass":"Стрелка компаса показывает, где север.","rope":"Верёвкой можно привязать нужные вещи к рюкзаку.","thermos":"В термосе чай долго остаётся тёплым.","shovel":"Лопаткой можно убрать снег с тропы.","crystal":"Кристалл нужен, чтобы зажечь Маяк."},"ruleGuide":[{"label":"Идём спокойно","meaning":"В классе и в коридоре ходим шагом. Оставляем друг другу место, чтобы никто не столкнулся.","example":"Идём в столовую, а из двери выходят ребята. Отходим в сторону и даём им пройти."},{"label":"Говорим негромко","meaning":"Говорим так, чтобы друг рядом нас слышал, а ребята за соседней партой могли спокойно разговаривать.","example":"Хотим позвать друга с другого конца класса. Подходим ближе и зовём его по имени."},{"label":"Бережём друг друга","meaning":"Следим, чтобы от наших слов и поступков никому не было больно или обидно. Если слышим «Стоп!», сразу останавливаемся.","example":"Друг говорит: «Не щекочи меня, мне неприятно». Сразу убираем руки."},{"label":"Играем дружно","meaning":"Приглашаем тех, кто хочет играть. Договариваемся, кто начнёт и когда будем меняться.","example":"Двое хотят водить. Договариваемся: один водит сейчас, другой — в следующей игре."},{"label":"По звонку готовимся к уроку","meaning":"Слышим звонок — заканчиваем игру и готовим вещи для урока. Так мы успеваем услышать первое задание.","example":"Играли в лото, а дальше математика. Складываем фишки в коробку и кладём на парту тетрадь в клетку."}],"starGuide":{"meaning":"В конце дня вспоминаем, как мы соблюдали правила. Учитель ставит всему классу до пяти звёздочек. Каждая звёздочка — один шаг Искорки к Маяку.","example":"Сегодня мы дружно играли, но в коридоре иногда бегали. Учитель поставил классу четыре звёздочки. Искорка сделает четыре шага! Завтра в коридоре пойдём шагом."}}</script>
+<script>
+(() => {
+  'use strict';
+
+  const themes = {
+    pass: {
+      title: ['Огни на', 'перевале'], ruleHeading: 'Созвездия правил',
+      inventory: 'Находки в пути', play: 'Открыть загадку',
+    },
+    glade: {
+      title: ['Маяк звёзд'], ruleHeading: 'Наши пять правил',
+      inventory: 'Наши находки', play: 'Решить загадку',
+    },
+    theater: {
+      title: ['Театр', 'теней'], ruleHeading: 'Пять правил сцены',
+      inventory: 'Наш реквизит', play: 'Начать сцену',
+    },
+  };
+
+  function node(tag, className, text) {
+    const el = document.createElement(tag);
+    if (className) el.className = className;
+    if (text !== undefined) el.textContent = text;
+    return el;
+  }
+
+  function hiddenMark(className, text) {
+    const el = node('span', className, text);
+    el.setAttribute('aria-hidden', 'true');
+    return el;
+  }
+
+  function action(className, label, handler) {
+    const button = node('button', className);
+    button.type = 'button';
+    button.setAttribute('aria-label', label);
+    button.addEventListener('click', handler);
+    return button;
+  }
+
+  const stars = [
+    [[1,15],[9,5],[17,13],[28,7]], [[2,9],[10,15],[18,3],[28,9]],
+    [[2,12],[7,5],[14,12],[21,4],[28,10]], [[1,15],[10,7],[18,11],[27,1]],
+    [[2,10],[9,4],[16,13],[28,5]],
+  ];
+  function constellation(n) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg','svg');
+    svg.setAttribute('viewBox','-2 -2 34 22');
+    svg.setAttribute('aria-hidden','true');
+    svg.setAttribute('class','home-stars');
+    const points = stars[n];
+    const line = document.createElementNS(svg.namespaceURI,'polyline');
+    line.setAttribute('points', points.map(pair => pair.join(',')).join(' '));
+    svg.append(line);
+    for (const [i,point] of points.entries()) {
+      const star = document.createElementNS(svg.namespaceURI,'circle');
+      star.setAttribute('cx',point[0]); star.setAttribute('cy',point[1]);
+      star.setAttribute('r',i === 1 ? '2.4' : '1.6');
+      svg.append(star);
+    }
+    return svg;
+  }
+
+  function ruleSection(theme, onRule) {
+    const section = node('section','home-rules');
+    const settings = themes[theme];
+    section.setAttribute('aria-label',settings.ruleHeading);
+    section.append(node('h3','home-section-title',settings.ruleHeading));
+    const list = node('ul','home-rule-list');
+    for (const [i, text] of window.RULES.entries()) {
+      const li = node('li');
+      const button = action('home-rule', text, () => onRule(i));
+      button.dataset.rule = i;
+      if (theme === 'pass') button.append(constellation(i));
+      if (theme === 'glade') button.append(hiddenMark('home-rule-emblem', ['🐾', '👂', '♥', '⚽', '🔔'][i]));
+      if (theme === 'theater') button.append(hiddenMark('home-rule-cut','✦'));
+      button.append(node('span','home-rule-name',text));
+      li.append(button); list.append(li);
+    }
+    section.append(list);
+    return section;
+  }
+
+  function gearSection(theme,owned,onObject) {
+    const section = node('section','home-gear');
+    const title = node('h3','home-section-title',themes[theme].inventory);
+    title.append(node('span','home-count',`${owned} из ${window.ITEMS.length}`));
+    section.append(title);
+    const list = node('ul','home-gear-list');
+    for (const [i,name] of window.ITEMS.entries()) {
+      const found = i < owned;
+      const state = found ? 'в рюкзаке' : 'ещё предстоит найти';
+      const li = node('li');
+      const button = action(`home-gear-button ${found ? 'home-found' : 'home-unfound'}`,`${name}, ${state}`,() => onObject(i));
+      button.title = `${name} · ${state}`;
+      button.dataset.item = i;
+      const holder = node('span','home-gear-holder');
+      const image = node('img','home-gear-art');
+      image.src = window.ASSETS[`gear${i}`]; image.alt = ''; image.draggable = false;
+      holder.append(image,hiddenMark('home-item-status', found ? '✓' : '?'));
+      button.append(holder,node('span','home-item-name',name));
+      li.append(button); list.append(li);
+    }
+    section.append(list);
+    return section;
+  }
+
+  function nextEpisode(theme,stop,onPlay) {
+    const box = node('section','home-episode');
+    box.setAttribute('aria-label','Текущая остановка');
+    box.append(node('p','home-place',stop.place));
+    const button = action('home-play', `${themes[theme].play} · ${stop.place}`, onPlay);
+    button.dataset.action = 'play';
+    const mark = hiddenMark('home-play-mark','▶');
+    button.append(mark,node('span','home-play-label',themes[theme].play));
+    box.append(button);
+    return box;
+  }
+
+  window.renderHome = function renderHome({theme,stop,owned,onPlay,onObject,onRule}) {
+    const settings = themes[theme];
+    const stage = node('section',`home-stage home-${theme}`);
+    stage.setAttribute('aria-label',settings.title.join(' '));
+    const world = node('div','home-world');
+    const bg = node('img','home-art'); bg.src = window.ASSETS[theme]; bg.alt = ''; bg.draggable = false;
+    world.append(bg,node('div','home-shade'));
+    if (theme === 'glade') {
+      const fox = node('img', 'home-fox');
+      fox.src = window.ASSETS.iskorka;
+      fox.alt = 'Искорка с картой в рюкзаке';
+      fox.draggable = false;
+      world.append(fox);
+    }
+    const title = node('h2','home-title');
+    for (const word of settings.title) title.append(node('span','home-title-line',word));
+    const status = node('p','home-status');
+    if (Number(stop.step) === 50) status.append(node('span','home-day','День 13'));
+    status.append(node('span','home-step',`${stop.step} из 100 шагов`));
+    world.append(title,status,ruleSection(theme,onRule),gearSection(theme,owned,onObject),nextEpisode(theme,stop,onPlay));
+    stage.append(world);
+    return stage;
+  };
+})();
+
+</script>
+<script>
+(() => {
+  'use strict';
+
+  const formats = {
+    detect: {name: 'Найди подсказки', symbol: 'glass', instruction: 'Нажми на две подсказки'},
+    fork: {name: 'Выбери ход', symbol: 'fork', instruction: 'Нажми на один вариант'},
+    direct: {name: 'Собери историю', symbol: 'film', instruction: 'Нажми на картинки по порядку'}
+  };
+
+  const drawings = {
+    glass: '<circle cx="10" cy="10" r="6.5"/><path d="m15 15 5 5M7 10a3 3 0 0 1 3-3"/>',
+    fork: '<path d="M12 21v-4c0-4-6-5-6-10V3m-3 3 3-3 3 3m3 11c0-4 6-5 6-10V3m-3 3 3-3 3 3"/>',
+    film: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M6 4v16m12-16v16M3 9h3m-3 6h3m12-6h3m-3 6h3m-11-4 4 2-4 2Z"/>',
+    light: '<path d="M8 15c0-2-2.5-3-2.5-6a6.5 6.5 0 1 1 13 0c0 3-2.5 4-2.5 6m-8 0h8m-7 3h6m-5 3h4"/>',
+    talk: '<path d="M20.5 13a3 3 0 0 1-3 3H12l-5 4v-4H6a3 3 0 0 1-3-3V7a3 3 0 0 1 3-3h11.5a3 3 0 0 1 3 3z"/><path d="M7.5 9.5h.01m4-.01h.01m4-.01h.01" stroke-width="3"/>',
+    home: '<path d="m2.5 11 9.5-8 9.5 8m-16-1v10h5v-6h3v6h5V10"/>',
+    arrow: '<path d="M4 12h15m-5-6 6 6-6 6"/>',
+    replay: '<path d="M4 10a8 8 0 1 1 0 5m0-11v6h6"/>',
+    check: '<path d="m4 12 5 5L20 6"/>',
+    trail: '<ellipse cx="8" cy="16" rx="2.6" ry="4.3" transform="rotate(-22 8 16)"/><ellipse cx="16" cy="8" rx="2.6" ry="4.3" transform="rotate(22 16 8)"/>',
+    star: '<path d="m12 2 2.9 6.3 6.8 1-5 4.9 1.2 6.8-5.9-3.3L6.1 21l1.2-6.8-5-4.9 6.8-1z"/>'
+  };
+
+  const create = (tag, cls, text) => {
+    const node = document.createElement(tag);
+    if (cls) node.className = cls;
+    if (text !== undefined) node.textContent = text;
+    return node;
+  };
+
+  function symbol(name) {
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 24 24');
+    svg.setAttribute('aria-hidden', 'true');
+    svg.setAttribute('fill', 'none');
+    svg.setAttribute('stroke', 'currentColor');
+    svg.setAttribute('stroke-width', '1.7');
+    svg.setAttribute('stroke-linecap', 'round');
+    svg.setAttribute('stroke-linejoin', 'round');
+    svg.innerHTML = drawings[name];
+    return svg;
+  }
+
+  function action(key, label, click, variant = 'subtle', glyph) {
+    const node = create('button', 'qp-button qp-' + variant);
+    node.type = 'button';
+    node.dataset.action = key;
+    if (glyph) node.append(symbol(glyph));
+    node.append(create('span', '', label));
+    node.addEventListener('click', click);
+    return node;
+  }
+
+  function detail(label, text, glyph) {
+    const block = create('details', 'qp-disclosure');
+    const summary = create('summary');
+    summary.append(symbol(glyph), create('span', '', label));
+    block.append(summary, create('p', '', text));
+    return block;
+  }
+
+  function renderPlayer({stop, format, art, onWin, onHome, onNext, onReplay}) {
+    const spec = formats[format];
+    const model = stop[format];
+    const last = Number(stop.step) === 100;
+    const stage = create('article', 'qp-stage qp-' + format);
+    stage.dataset.format = format;
+    stage.dataset.stop = stop.id;
+    const picks = [];
+    let phase = 'play';
+    let winSent = false;
+
+    const top = create('div', 'qp-top');
+    const formatMark = create('span', 'qp-format-tag');
+    formatMark.append(symbol(spec.symbol), create('span', '', spec.name));
+    top.append(formatMark, action('home', 'К Искорке', onHome, 'home-link', 'home'));
+
+    const main = create('div', 'qp-main');
+    const picture = create('figure', 'qp-image');
+    const sceneImage = create('img', 'qp-scene-art');
+    sceneImage.src = art.before;
+    sceneImage.alt = art.altBefore || ('Иллюстрация остановки «' + stop.place + '»');
+    const cap = create('figcaption', 'qp-caption');
+    const stepLabel = create('span', 'qp-waypoint');
+    stepLabel.append(symbol('trail'), create('span', '', 'Шаг ' + stop.step));
+    const place = create('h2', 'qp-place', stop.place);
+    cap.append(stepLabel, place);
+    picture.append(sceneImage, cap);
+    const listening = stop.id === 'compass' && format === 'detect' ? window.renderListeningExperiment?.() : null;
+    if (listening) picture.append(listening);
+    const body = create('div', 'qp-content');
+    body.setAttribute('aria-label', 'Загадка класса');
+    main.append(picture, body);
+    stage.append(top, main);
+
+    const card = (entry, index, handler) => {
+      const button = create('button', 'qp-card');
+      button.type = 'button';
+      button.dataset.choice = String(index);
+      if (format !== 'fork') button.setAttribute('aria-pressed', 'false');
+      const graphic = create('span', 'qp-pictogram', entry.icon);
+      graphic.setAttribute('aria-hidden', 'true');
+      const label = create('span', 'qp-card-label', entry.label);
+      const badge = create('span', 'qp-mark');
+      badge.setAttribute('aria-hidden', 'true');
+      if (format === 'fork') badge.append(symbol('arrow'));
+      button.append(graphic, label, badge);
+      button.addEventListener('click', handler);
+      return button;
+    };
+
+    function focusHeading() {
+      const heading = body.querySelector('h3');
+      if (!heading || !stage.isConnected) return;
+      heading.focus({preventScroll: true});
+      if (heading.getBoundingClientRect().top < 0) heading.scrollIntoView({block: 'nearest'});
+    }
+
+    function heading(text) {
+      const node = create('h3', 'qp-heading', text);
+      node.tabIndex = -1;
+      return node;
+    }
+
+    function finish() {
+      if (phase === 'end') return;
+      phase = 'end';
+      stage.dataset.phase = phase;
+      stage.classList.add('qp-finished');
+      if (listening) listening.remove();
+      sceneImage.src = art.after || art.before;
+      sceneImage.alt = 'Иллюстрация завершённой остановки «' + stop.place + '»';
+      const payoff = stop.payoff || (last ? 'Маяк зажёгся!' : stop.item);
+      const victoryMark = create('div', 'qp-victory-mark');
+      const awardLabel = last ? 'Путь пройден' : stop.item ? 'В рюкзаке Искорки' : 'Помогли Искорке';
+      victoryMark.append(symbol(last ? 'star' : 'check'), create('span', '', awardLabel));
+      const rule = create('p', 'qp-rule');
+      rule.append(symbol('star'), create('span', '', stop.rule));
+      const transfer = create('section', 'qp-transfer');
+      transfer.append(create('h4', '', 'А как у нас в классе?'), create('p', '', stop.transfer));
+      const controls = create('div', 'qp-actions');
+      controls.append(action('next', last ? 'К Искорке' : 'Идём дальше', onNext, 'primary', 'arrow'),
+        action('replay', 'Ещё раз', onReplay, 'subtle', 'replay'));
+      body.replaceChildren(victoryMark, heading(payoff), rule, transfer, controls);
+      if (!winSent) {
+        winSent = true;
+        onWin();
+      }
+      focusHeading();
+    }
+
+    function feedback(title, text) {
+      const result = create('section', 'qp-outcome');
+      result.append(create('h4', '', title), create('p', '', text));
+      return result;
+    }
+
+    function examine(showAnswer = false) {
+      phase = 'review';
+      stage.dataset.phase = phase;
+      const chosen = picks.map(i => (format === 'detect' ? model.clues : format === 'direct' ? model.beats : model.plans)[i].label);
+      const isCanonical = format === 'direct' ? picks.every((v, i) => v === i) : format === 'detect' && model.key.every(i => picks.includes(i));
+      let title = format === 'fork' ? chosen[0] : format === 'detect' ? 'Наши подсказки' : 'Наша история';
+      if (showAnswer === true) title = format === 'direct' ? 'История Искорки' : 'Подсказки Искорки';
+      const list = create('div', 'qp-review-picks');
+      if (format !== 'fork') chosen.forEach((x, i) => {
+        const node = create('span', 'qp-review-pick');
+        const marker = create('b', '', format === 'direct' ? String(i + 1) : '•');
+        node.append(marker, create('span', '', x));
+        list.append(node);
+      });
+      body.replaceChildren(heading(title));
+      if (list.children.length) body.append(list);
+      if (format === 'fork') {
+        body.append(feedback('Вот что вышло', model.plans[picks[0]].result),
+          create('p', 'qp-discussion', model.talk));
+      } else if (isCanonical) {
+        body.append(feedback(format === 'detect' ? 'Как сделала Искорка' : 'Вот что вышло', model.why));
+      } else {
+        const prompt = format === 'detect'
+          ? model.missingHints[model.key.find(i => !picks.includes(i))]
+          : model.orderHints[picks.indexOf(0) > picks.indexOf(1) ? 0 : 1];
+        body.append(feedback('Давай подумаем ещё', prompt));
+      }
+      const buttons = create('div', 'qp-actions');
+      const needsHelp = format !== 'fork' && !isCanonical;
+      if (!needsHelp) {
+        buttons.append(action('finish', last && format !== 'direct' ? 'Зажечь Маяк' : 'Смотрим дальше', finish, 'primary', 'arrow'));
+      }
+      if (format === 'fork') {
+        const other = 1 - picks[0];
+        buttons.append(action('other', 'Попробовать другой ход', () => {
+          picks[0] = other;
+          examine();
+        }, 'subtle', 'fork'));
+      } else {
+        buttons.append(action('retry', format === 'detect' ? 'Выбрать другие подсказки' : 'Переставить кадры', () => {
+          picks.length = 0;
+          phase = 'play';
+          play();
+          focusHeading();
+        }, needsHelp ? 'primary' : 'subtle', 'replay'));
+        if (needsHelp) {
+          buttons.append(action('show-solution', 'Как сделала Искорка?', () => {
+            const answer = format === 'direct' ? [0, 1, 2] : model.key;
+            picks.splice(0, picks.length, ...answer);
+            examine(true);
+          }, 'subtle', 'light'));
+        }
+      }
+      body.append(buttons);
+      focusHeading();
+    }
+
+    function talkText() {
+      if (format === 'detect') return 'Покажи одну подсказку. Пусть сосед найдёт вторую. Вместе скажите, что они подсказали.';
+      if (format === 'direct') return 'Обсуди с соседом, что было сначала. Потом покажите свой порядок.';
+      return 'Скажи соседу, как бы ты поступил. Попробуйте оба хода и сравните, что вышло.';
+    }
+
+    function play() {
+      stage.dataset.phase = phase;
+      const setup = create('p', 'qp-setup', model.setup);
+      const ask = heading(model.ask);
+      const task = create('div', 'qp-instruction');
+      const count = create('span', 'qp-count');
+      count.setAttribute('role', 'status');
+      task.append(create('strong', '', spec.instruction), count);
+      const choices = create('div', 'qp-cards');
+      choices.setAttribute('role', 'group');
+      choices.setAttribute('aria-label', spec.instruction);
+      const controls = create('div', 'qp-actions');
+      const resources = create('div', 'qp-resources');
+      if (format !== 'fork') resources.append(detail('Нужна помощь?', model.hint, 'light'));
+      resources.append(detail('Обсудим с другом', talkText(), 'talk'));
+      body.replaceChildren(setup, ask, task, choices, controls, resources);
+      const entries = format === 'detect' ? model.clues : format === 'direct' ? model.beats : model.plans;
+      const orders = [[2,0,1], [1,2,0], [1,0,2], [2,1,0]];
+      const order = format === 'fork' ? [0,1] : orders[Number(stop.step) % orders.length];
+      const buttons = new Map();
+      const amount = format === 'detect' ? 2 : 3;
+      const primary = action('review', format === 'detect' ? 'Проверить подсказки' : 'Показать историю', examine, 'primary', 'arrow');
+      const undo = action('undo', 'Убрать последнюю картинку', () => {
+        picks.pop();
+        update();
+      }, 'subtle', 'replay');
+      if (format !== 'fork') controls.append(primary);
+      if (format === 'direct') controls.append(undo);
+      order.forEach(i => {
+        const button = card(entries[i], i, () => {
+          if (format === 'fork') {
+            picks[0] = i;
+            examine();
+            return;
+          }
+          const position = picks.indexOf(i);
+          if (position >= 0) picks.splice(position, 1);
+          else if (picks.length < amount) picks.push(i);
+          update();
+        });
+        buttons.set(i, button);
+        choices.append(button);
+      });
+      function update() {
+        if (format === 'fork') return;
+        count.textContent = picks.length + ' из ' + amount;
+        primary.disabled = picks.length < amount;
+        undo.disabled = picks.length === 0;
+        for (const [index, node] of buttons) {
+          const at = picks.indexOf(index);
+          const selected = at >= 0;
+          node.classList.toggle('qp-picked', selected);
+          node.setAttribute('aria-pressed', String(selected));
+          node.disabled = !selected && picks.length === amount;
+          node.setAttribute('aria-label', entries[index].label + (selected && format === 'direct' ? '. Кадр ' + (at + 1) : ''));
+          const mark = node.querySelector('.qp-mark');
+          mark.replaceChildren();
+          if (selected && format === 'direct') mark.textContent = String(at + 1);
+          if (selected && format === 'detect') mark.append(symbol('check'));
+        }
+      }
+      update();
+    }
+
+    play();
+    return stage;
+  }
+
+  window.renderPlayer = renderPlayer;
+})();
+
+</script>
+<script>
+(() => {
+  'use strict';
+  window.renderListeningExperiment = function () {
+    const section = document.createElement('section');
+    section.className = 'listening'; section.setAttribute('aria-label','Послушать лес');
+    const title = document.createElement('strong'); title.textContent = 'Послушаем лес';
+    const controls = document.createElement('div');
+    const status = document.createElement('span'); status.className = 'sound-status'; status.setAttribute('role','status');
+    const player = document.createElement('audio');
+    let active = '';
+    function silence() {player.pause(); active=''; for(const b of controls.children) b.setAttribute('aria-pressed','false'); status.textContent='';}
+    player.addEventListener('ended',silence);
+    for (const [key,label] of [['walk','Искорка шагает'],['still','Искорка стоит']]) {
+      const button = document.createElement('button'); button.type='button'; button.textContent='▶  '+label; button.dataset.sound=key; button.setAttribute('aria-pressed','false');
+      button.onclick = async () => {
+        if(active===key){silence();return;}
+        silence(); active=key; player.src=window.ASSETS[key]; button.setAttribute('aria-pressed','true'); status.textContent='Слушаем…';
+        try {await player.play();} catch {if(active===key){silence();status.textContent='Нажми «Что слышно?» ниже.';}}
+      };
+      controls.append(button);
+    }
+    const alt = document.createElement('details'); const summary = document.createElement('summary'); summary.textContent='Что слышно?';
+    const words=document.createElement('p'); words.textContent='Пока Искорка идёт, слышны два звона. Один звякает рядом, другой справа. Искорка встала. Теперь звенит только справа.';
+    alt.append(summary,words);section.append(title,controls,status,alt,player);
+    const observer=new MutationObserver(()=>{if(!section.isConnected){silence();observer.disconnect();}});
+    observer.observe(document.getElementById('stage'),{childList:true,subtree:true});
+    return section;
+  };
+})();
+
+</script>
+<script>
+(() => {
+  'use strict';
+  const pack=JSON.parse(document.getElementById('payload').textContent);
+  const {stops,captions,scenes}=pack;
+  const gearStops = stops.filter(s => s.item && s.id !== 'lighthouse');
+  window.RULES=pack.rules; window.ASSETS=pack.assets; window.ITEMS=gearStops.map(s=>s.item);
+  const themes={pass:'Перевал',glade:'Лесная поляна',theater:'Театр'};
+  const formats={detect:'Найди подсказки',fork:'Выбери ход',direct:'Собери историю'};
+  const symbols={detect:'⌕',fork:'⑂',direct:'▤'};
+  const ruleIcons=['🐾','👂','♥','⚽','🔔'];
+  const ruleHashPattern=/^#rules(?:\/(glade|pass|theater)\/([0-4]))?$/;
+  const initialRules=location.hash.match(ruleHashPattern);
+  function routeFromHash(hash) {
+    const [page,themeKey,stopKey,formatKey]=hash.slice(1).split('/');
+    return {
+      theme:Object.hasOwn(themes,themeKey)?themeKey:'glade',
+      idx:Math.max(0,stops.findIndex(s=>s.id===stopKey)),
+      format:Object.hasOwn(formats,formatKey)?formatKey:'detect',
+      view:page==='play'?'play':'home'
+    };
+  }
+  const initialGame=initialRules ? (history.state?.ruleParent || '#home/'+(initialRules[1]||'glade')) : location.hash;
+  let {theme,idx,format,view}=routeFromHash(initialGame);
+  let rulesVisible=false;
+  let won=false,clean=false;
+  const $=id=>document.getElementById(id),stage=$('stage'),dialog=$('overlay'),sheet=$('sheet');
+  const node=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!=null)el.textContent=text;return el;};
+  const btn=(cls,text,fn)=>{const el=node('button',cls,text);el.type='button';el.onclick=fn;return el;};
+  function close(){
+    rulesVisible=false;
+    if(dialog.open)dialog.close();
+  }
+  function dismiss(){
+    if(rulesVisible && history.state?.ruleParent){
+      history.back();
+      return;
+    }
+    close();
+    pushHash();
+  }
+  dialog.addEventListener('cancel',ev=>{if(rulesVisible){ev.preventDefault();dismiss();}});
+  function owned(){
+    const current=stops[idx];
+    return gearStops.filter(s=>s.step<current.step || (won && s.id===current.id)).length;
+  }
+  function gameHash(){return '#'+[view,theme,stops[idx].id,format].join('/');}
+  function pushHash(){if(location.hash!==gameHash())history.replaceState(null,'',gameHash());}
+  function shellModal(title,small=false){
+    sheet.replaceChildren();dialog.classList.remove('rules-book','rule-detail');dialog.classList.toggle('small',small);
+    const head=node('div','sheet-head');const h=node('h2','',title);h.id='overlay-title';
+    const x=btn('sheet-close','×',dismiss);x.setAttribute('aria-label','Закрыть');head.append(h,x);sheet.append(head);
+    if(!dialog.open)dialog.showModal();dialog.scrollTop=0;
+  }
+  dialog.addEventListener('click',ev=>{if(ev.target===dialog){const b=dialog.getBoundingClientRect();if(ev.clientY<b.top||ev.clientY>b.bottom||ev.clientX<b.left||ev.clientX>b.right)close();}});
+  function start(i,k){
+    close();if(i!==idx)won=false;idx=i;format=k;view='play';render(true);
+  }
+  function home(){close();view='home';render(true);}
+  function openItem(i){
+    const s=gearStops[i],found=i<owned();
+    shellModal(s.item,true);
+    const pic=node('img','detail-item'+(found?'':' detail-future'));pic.alt='';pic.src=window.ASSETS['gear'+i];
+    const body=node('p','detail-text',found?'Уже в рюкзаке. '+pack.itemCopy[s.id]:'Искорка ещё ищет этот предмет. '+s.place+'.');
+    const go=btn('launch','Решить загадку',()=>start(stops.indexOf(s),format));sheet.append(pic,body,go);
+  }
+  function ruleIcon(i){
+    const icon=node('span','rule-emblem',ruleIcons[i]);
+    icon.setAttribute('aria-hidden','true');
+    icon.dataset.ink=String(i);
+    return icon;
+  }
+  function markRulePage(hash){
+    if(location.hash!==hash){
+      if(ruleHashPattern.test(location.hash)) history.replaceState(history.state,'',hash);
+      else history.pushState({ruleParent:gameHash()},'',hash);
+    }
+    rulesVisible=true;
+  }
+  function focusRuleTitle(){
+    const title=$('overlay-title');
+    title.tabIndex=-1;
+    title.focus({preventScroll:true});
+    dialog.scrollTop=0;
+  }
+  function openRule(i){
+    const rule=pack.ruleGuide[i];
+    markRulePage('#rules/'+theme+'/'+i);
+    shellModal(rule.label,true);
+    dialog.classList.add('rule-detail');
+    $('overlay-title').prepend(ruleIcon(i));
+    const example=node('section','rule-example');
+    example.append(node('h3','','Пример из школы'),node('p','',rule.example));
+    const actions=node('div','rule-actions');
+    const first=stops.findIndex(s=>s.rule===rule.label);
+    const quest=btn('rule-related','Решить загадку',()=>start(first,format));
+    quest.dataset.ruleQuest='';
+    actions.append(btn('launch','Все правила',openRules),quest);
+    sheet.append(node('p','rule-meaning',rule.meaning),example,actions);
+    focusRuleTitle();
+  }
+  function openRules(){
+    markRulePage('#rules');
+    shellModal('Правила класса');
+    dialog.classList.add('rules-book');
+    const layout=node('div','rule-layout');
+    const list=node('ul','rule-list');
+    for(const [i,rule] of pack.ruleGuide.entries()){
+      const li=node('li','');
+      const button=btn('rule-entry','',()=>openRule(i));
+      button.dataset.openRule=String(i);
+      const copy=node('span','rule-copy');
+      copy.append(node('strong','',rule.label),node('span','',rule.meaning));
+      const chevron=node('span','rule-more','›');chevron.setAttribute('aria-hidden','true');
+      button.append(ruleIcon(i),copy,chevron);
+      li.append(button);list.append(li);
+    }
+    const day=node('section','rule-day');
+    day.append(node('h3','','Звёздочки за день'),node('p','',pack.starGuide.meaning));
+    const sample=node('div','rule-day-example');
+    const stars=node('span','rule-stars','★★★★');
+    stars.append(node('span','','☆'));stars.setAttribute('aria-hidden','true');
+    sample.append(node('h4','','Например, четыре звёздочки'),stars,node('p','',pack.starGuide.example));
+    day.append(sample);
+    layout.append(list,day);sheet.append(layout);
+    focusRuleTitle();
+  }
+  function openCatalogue(selected=idx){
+    shellModal('Остановки и загадки');
+    sheet.append(node('p','sheet-intro','Выбери место на пути и загадку.'));
+    const grid=node('div','selector-grid'), list=node('div','stop-picker'), box=node('div','selected-stop');
+    list.setAttribute('role','group');list.setAttribute('aria-label','Остановки на пути');
+    function select(i){
+      selected=i; const s=stops[i];
+      for(const [n,el] of [...list.children].entries())el.setAttribute('aria-pressed',String(n===i));
+      const pic=node('img','preview-place');pic.src=scenes[s.id].detect;pic.alt='';
+      const h=node('h3','',[s.place,s.item].filter(Boolean).join(' · '));
+      box.replaceChildren(pic,h,node('p','',s.scene));
+      for(const [n,[key,name]] of Object.entries(formats).entries()){
+        const b=btn('format-entry','',()=>start(i,key));
+        b.dataset.format=key;b.dataset.stop=s.id;
+        const copy=node('span','');copy.append(node('strong','',name),node('small','',captions[s.id][n]));
+        const mark=node('span','format-symbol',symbols[key]);mark.setAttribute('aria-hidden','true');
+        b.append(mark,copy,node('span','format-chevron','›'));box.append(b);
+      }
+      box.append(btn('selector-next','Посмотреть, где Искорка',()=>{idx=i;won=false;home();}));
+    }
+    for(const [i,s] of stops.entries()){
+      const b=btn('','',()=>select(i));b.dataset.stop=s.id;
+      const text=node('span','',s.place);text.append(node('small','',s.item || 'Первая загадка'));
+      b.append(node('b','',s.step),text);list.append(b);
+    }
+    grid.append(list,box);sheet.append(grid);select(selected);
+  }
+  function openCompare(){
+    shellModal('Было / стало');
+    sheet.append(node('p','sheet-intro','Выберите загадку справа, чтобы сыграть. Слева можно прочитать прежний вопрос на этой остановке.'));
+    const table=node('table','comp-table'),thead=table.createTHead(),head=thead.insertRow();
+    for(const t of ['Остановка и прежний вопрос','Три игровых варианта']){const th=node('th','',t);th.scope='col';head.append(th);}
+    const tbody=table.createTBody();
+    for(const [i,s] of stops.entries()){
+      const row=tbody.insertRow(),left=node('th','');left.scope='row';left.append(node('strong','',s.step+' · '+s.place),node('small','',s.before ? s.item+' · «'+s.before+'»' : 'Новая остановка. Раньше первая загадка была на шаге 15.'));row.append(left);
+      const right=row.insertCell();
+      for (const [n,[key,name]] of Object.entries(formats).entries()){
+        const link=btn('comparison-link','',()=>start(i,key));link.dataset.stop=s.id;link.dataset.format=key;
+        link.append(node('b','',name+'  ›  '),document.createTextNode(captions[s.id][n]));right.append(link);
+      }
+    }
+    sheet.append(table);
+  }
+  const tab=$('theme-list');
+  for(const [key,title] of Object.entries(themes)){
+    const b=btn('theme',title,()=>{theme=key;home();});b.dataset.theme=key;tab.append(b);
+  }
+  function render(focus=false,keepHash=false){
+    if(!keepHash)pushHash(); const s=stops[idx];
+    for(const b of tab.children)b.setAttribute('aria-pressed',String(theme===b.dataset.theme));
+    if(view==='home'){
+      stage.replaceChildren(window.renderHome({theme,stop:s,owned:owned(),onPlay:()=>start(idx,format),onObject:openItem,onRule:openRule}));
+    }else{
+      const player=window.renderPlayer({stop:s,format,art:{before:scenes[s.id][format],after:scenes[s.id].after,altBefore:pack.pictureNotes[s.id][Object.keys(formats).indexOf(format)]},
+        onWin:()=>{won=true;},onHome:home,onNext:()=>{if(idx===stops.length-1){home();return;}idx++;won=false;home();},onReplay:()=>start(idx,format)});
+      const tools=node('nav','player-tools');tools.setAttribute('aria-label','Сравнить способы игры');
+      tools.append(node('span','','На этой остановке'));
+      for(const [key,title] of Object.entries(formats)){
+        const b=btn('',title,()=>start(idx,key));b.dataset.switchFormat=key;b.setAttribute('aria-pressed',String(key===format));tools.append(b);
+      }
+      tools.hidden=clean;stage.replaceChildren(tools,player);
+    }
+    if(focus){window.scrollTo({top:0,behavior:'instant'});stage.focus({preventScroll:true});}
+  }
+  function cleanMode(enabled){
+    clean=enabled;document.body.classList.toggle('during-show',enabled);$('studio').hidden=enabled;$('present-exit').hidden=!enabled;
+    const tools=stage.querySelector('.player-tools');if(tools)tools.hidden=enabled;
+    window.scrollTo(0,0);
+  }
+  $('present').onclick=async ()=>{cleanMode(true);try{if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();}catch{/* Good embedded viewers can still hide the studio controls. */}};
+  $('present-exit').onclick=()=>{cleanMode(false);if(document.fullscreenElement)document.exitFullscreen().catch(()=>{});$('present').focus();};
+  document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&clean)cleanMode(false);});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&clean&&!dialog.open)cleanMode(false);});
+  $('catalog-open').onclick=()=>openCatalogue();$('compare-open').onclick=openCompare;
+  $('rules-open').onclick=openRules;
+  function showRuleHash(match) {
+    if(match[2]!==undefined) openRule(Number(match[2]));
+    else openRules();
+  }
+  window.addEventListener('hashchange',()=>{
+    const requestedRules=location.hash.match(ruleHashPattern);
+    if(requestedRules){showRuleHash(requestedRules);return;}
+    if(rulesVisible && location.hash===gameHash()){close();return;}
+    const route=routeFromHash(location.hash);
+    if(idx!==route.idx)won=false;
+    ({theme,idx,format,view}=route);
+    close();render(true);
+  });
+  render(false,Boolean(initialRules));
+  if(initialRules)showRuleHash(initialRules);
+})();
+
+</script>
+</body>
+</html>
