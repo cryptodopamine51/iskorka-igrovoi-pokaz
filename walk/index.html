@@ -1,4 +1,4 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,"><title>Дружные перемены · Искорка</title><meta name="iskorka-release" content="9.4.0"><style>#iskorka-winter .rules-trigger {
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,"><title>Дружные перемены · Искорка</title><meta name="iskorka-release" content="9.4.1"><style>#iskorka-winter .rules-trigger {
   color: #294c3a;
   background: #fff7dd;
   border: 2px solid #bfa877;
@@ -1466,6 +1466,333 @@ body { margin: 0; padding: 0; max-width: none; background: #081124; }
   #iskorka-winter #iw-home .team-day { margin-bottom: 9px; }
   #iskorka-winter #iw-home .finding-frame { width: min(100%, 64px); }
 }
+</style><style id="iskorka-layout-patch">
+/* Iskorka 9.4.1 — keep each screen usable at the size where it is shown. */
+#iskorka-winter {
+  --scene-gutter: clamp(16px, 5.15vw, 84px);
+  --veil-edge: clamp(10px, 2.2dvh, 22px);
+  --map-edge: clamp(12px, 2.6vw, 30px);
+  --map-bottom: max(var(--map-edge), env(safe-area-inset-bottom, 0px));
+}
+#iskorka-winter :is(#iw-demo-controls,.teacher-tools) { padding-inline: var(--scene-gutter); }
+#iskorka-winter:not(.viewing-map) .game { min-height: max(0px, calc(100svh - 42px)); overflow: clip; }
+#iskorka-winter #iw-home {
+  --home-gutter: var(--scene-gutter);
+  padding-block: clamp(15px, 3.15svh, 32px) clamp(14px, 2.15svh, 24px);
+  gap: clamp(10px, 1.6svh, 18px);
+  overflow: clip;
+}
+#iskorka-winter #iw-home .home-reading { display: contents; }
+#iskorka-winter #iw-home .night-hero { width: min(100%, 660px); }
+#iskorka-winter #iw-home .night-hero h1 {
+  font-size: clamp(2.6rem, min(6.3vw, 8.65svh), 6.15rem);
+  margin: 0 0 clamp(6px, 1.15svh, 12px);
+}
+#iskorka-winter #iw-home .night-hero h1 span { display: block; }
+#iskorka-winter #iw-home .team-day { margin-block-end: clamp(8px, 1.6svh, 16px); }
+#iskorka-winter #iw-home .home-section-heading { margin-block-end: 6px; }
+#iskorka-winter #iw-home .night-score { inset-inline-end: var(--home-gutter); }
+#iskorka-winter #iw-home .home-findings { width: min(100%, 600px); }
+#iskorka-winter #iw-home .findings-list { gap: clamp(5px, .85vw, 10px); }
+#iskorka-winter #iw-home .finding-frame { width: min(100%, clamp(53px, 8.2svh, 76px)); }
+#iskorka-winter #iw-home .home-dock {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  min-inline-size: 0;
+}
+#iskorka-winter #iw-home .home-go { margin: 0; min-width: 0; }
+#iskorka-winter #iw-home .home-resume {
+  position: static;
+  margin: 0;
+  flex: 0 1 auto;
+  min-height: 44px;
+  max-width: 100%;
+  padding: 7px 12px;
+  white-space: normal;
+}
+
+@media (min-width: 761px) and (max-height: 760px) {
+  #iskorka-winter #iw-home { padding-block: 14px 13px; gap: 9px; }
+  #iskorka-winter #iw-home .night-hero h1 { font-size: clamp(2.55rem, 7.4svh, 3.45rem); margin-bottom: 7px; }
+  #iskorka-winter #iw-home .team-day { margin-bottom: 9px; }
+}
+
+/* Reading order stays title, class, rules, findings, action on narrow screens. */
+@media (max-width: 760px) {
+  #iskorka-winter #iw-home { --scene-gutter: clamp(14px, 4.7vw, 31px); padding-top: clamp(38px, 6.2svh, 58px); }
+  #iskorka-winter #iw-home .night-hero h1 { font-size: clamp(2.05rem, 8.4vw, 3.5rem); }
+  #iskorka-winter #iw-home .night-hero .rules-trigger { text-align: left; }
+  #iskorka-winter #iw-home .night-score { top: 10px; }
+  #iskorka-winter #iw-home .night-score .star-total { min-height: 42px; padding: 4px 10px; font-size: 1.56rem; gap: 7px; }
+  #iskorka-winter #iw-home .night-score .star-total svg { width: 22px; height: 22px; }
+  #iskorka-winter #iw-home .home-dock { justify-content: center; }
+  #iskorka-winter #iw-home .home-go { width: min(100%, 380px); }
+  #iskorka-winter #iw-home .home-resume { text-align: center; }
+}
+@media (max-width: 520px) {
+  #iskorka-winter #iw-home::before { background: linear-gradient(90deg,#08152bf0 4%,#08152bbf 57%,#08152b42 100%); }
+  #iskorka-winter #iw-home .night-hero .constellation-shortcuts .rules-trigger { font-size: clamp(1.125rem, 5.3vw, 1.32rem); }
+  #iskorka-winter #iw-home .finding-frame { width: min(100%, 58px); }
+}
+@media (max-width: 520px) and (max-height: 735px) {
+  #iskorka-winter #iw-home {
+    height: calc(100svh - 43px);
+    min-height: 0;
+    gap: 8px;
+    padding-block: 0 max(8px, env(safe-area-inset-bottom, 0px));
+  }
+  #iskorka-winter #iw-home .home-reading {
+    position: relative;
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    min-height: 0;
+    gap: 9px;
+    padding: clamp(38px, 6.2svh, 58px) 4px 7px;
+    margin-inline: -4px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scroll-padding-block: 8px;
+    scrollbar-width: thin;
+    scrollbar-color: #56799c #111e35;
+  }
+  #iskorka-winter #iw-home .home-reading > :is(.night-hero,.home-findings) { flex: none; }
+  #iskorka-winter #iw-home .night-score { inset-inline-end: 4px; }
+  #iskorka-winter #iw-home .home-dock {
+    flex: none;
+    z-index: 4;
+    background: #0d1b32;
+    border: 1px solid #436084;
+    border-radius: 13px;
+    box-shadow: 0 5px 18px #060e22c0;
+    padding: 8px;
+    gap: 5px;
+  }
+  #iskorka-winter #iw-home .home-dock:has(.home-resume:not([hidden])) { padding-block: 5px; }
+  #iskorka-winter #iw-home .home-go { width: 100%; }
+  #iskorka-winter #iw-home .finding-frame { width: min(100%, 51px); }
+}
+
+/* Short, wide windows: illustration remains behind two compact reading columns. */
+@media (min-width: 550px) and (max-height: 655px) and (min-aspect-ratio: 4/3) {
+  #iskorka-winter #iw-home {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.12fr);
+    grid-template-rows: auto auto 1fr auto;
+    gap: 8px clamp(16px, 3vw, 38px);
+    padding-block: clamp(11px, 2.5svh, 18px);
+    align-items: start;
+  }
+  #iskorka-winter #iw-home .night-hero { display: contents; }
+  #iskorka-winter #iw-home .night-hero > :is(h1,.team-day,.home-rules) { position: relative; z-index: 2; }
+  #iskorka-winter #iw-home .night-hero h1 { grid-area: 1 / 1; margin: 0; font-size: clamp(2rem, 5.4vw, 3.55rem); }
+  #iskorka-winter #iw-home .team-day { grid-area: 2 / 1; margin: 0 77px 0 0; align-self: center; min-height: 41px; }
+  #iskorka-winter #iw-home .group { font-size: clamp(1.6rem, 3.5vw, 2.55rem); }
+  #iskorka-winter #iw-home .night-score { grid-area: 2 / 1; position: static; justify-self: end; align-self: center; }
+  #iskorka-winter #iw-home .night-score .star-total { min-height: 41px; padding: 5px 10px; gap: 6px; font-size: 1.55rem; }
+  #iskorka-winter #iw-home .night-score small { display: none; }
+  #iskorka-winter #iw-home .home-rules { grid-area: 1 / 2 / span 4; }
+  #iskorka-winter #iw-home .home-section-heading { column-gap: 9px; }
+  #iskorka-winter #iw-home .home-rules h2 { font-size: clamp(1.09rem, 2.12vw, 1.55rem); }
+  #iskorka-winter #iw-home .night-hero .constellation-shortcuts .rules-trigger { min-height: 36px; font-size: clamp(1.07rem, 2.1vw, 1.55rem); }
+  #iskorka-winter #iw-home .constellation-icon { width: 28px; height: 27px; }
+  #iskorka-winter #iw-home .home-findings { grid-area: 3 / 1; align-self: end; margin-top: 0; }
+  #iskorka-winter #iw-home .findings-list { grid-template-columns: repeat(7,minmax(0,1fr)); }
+  #iskorka-winter #iw-home .finding-frame { width: min(100%, 46px); }
+  #iskorka-winter #iw-home .finding-name { font-size: clamp(.66rem,1.1vw,.87rem); overflow-wrap: anywhere; }
+  #iskorka-winter #iw-home .home-dock { grid-area: 4 / 1; justify-content: start; }
+  #iskorka-winter #iw-home .home-go { min-height: 44px; }
+  #iskorka-winter #iw-home::before { background: linear-gradient(90deg,#09172bd9 0%,#09172b85 47%,#09172bd9 100%); }
+}
+@media (min-width: 550px) and (max-height: 360px) and (min-aspect-ratio: 4/3) {
+  #iskorka-winter #iw-demo-controls { padding-block: 8px; }
+  #iskorka-winter:not(.viewing-map) .game { min-height: max(0px, calc(100svh - 34px)); }
+  #iskorka-winter #iw-home { padding-block: 8px; row-gap: 6px; }
+  #iskorka-winter #iw-home .night-hero h1 { font-size: clamp(1.75rem, 5.4vw, 2.6rem); }
+  #iskorka-winter #iw-home .night-hero .constellation-shortcuts .rules-trigger { min-height: 32px; font-size: 1rem; }
+  #iskorka-winter #iw-home .constellation-icon { width: 24px; height: 23px; }
+}
+
+/* Full-window overlays use their own scroll region, not the page beneath them. */
+html:has(#iskorka-winter .veil:not([hidden])) { overflow: hidden; }
+#iskorka-winter .veil:not([hidden]) {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  display: flex;
+  align-items: safe center;
+  justify-content: center;
+  padding: var(--veil-edge);
+  overflow: auto;
+  overscroll-behavior: contain;
+}
+#iskorka-winter .veil .paper {
+  max-height: calc(100dvh - 2 * var(--veil-edge));
+  border-width: 1px;
+  border-radius: 18px;
+}
+#iskorka-winter #iw-bag { padding: var(--veil-edge); }
+#iskorka-winter #iw-bag .backpack { max-height: none; }
+#iskorka-winter #iw-bag .subtitle { margin-block-end: 0; }
+#iskorka-winter #iw-bag #iw-bag-detail :is(h3,p,strong,small) { overflow-wrap: anywhere; }
+@media (max-width: 365px) {
+  #iskorka-winter #iw-bag .bag-layout { gap: 7px; }
+  #iskorka-winter #iw-bag .bag-grid { grid-template-columns: repeat(7,minmax(0,1fr)); padding: 5px; gap: 4px; }
+  #iskorka-winter #iw-bag .bag-slot { min-height: 32px; }
+  #iskorka-winter #iw-bag .memory { padding: 4px 6px; line-height: 1.12; }
+  #iskorka-winter #iw-bag #iw-bag-detail { grid-template-columns: 34px minmax(0,1fr); gap: 3px 7px; }
+  #iskorka-winter #iw-bag #iw-bag-detail .object { grid-row: 1 / span 2; }
+  #iskorka-winter #iw-bag #iw-bag-detail :is(p,small) { grid-column: 1 / -1; }
+}
+@media (min-width: 550px) and (max-height: 480px) {
+  #iskorka-winter #iw-bag .bag-layout { grid-template-columns: minmax(174px, .66fr) minmax(0,1.34fr); gap: 9px; margin-top: 7px; }
+  #iskorka-winter #iw-bag .bag-grid { grid-template-columns: repeat(4,minmax(0,39px)); justify-content: start; }
+  #iskorka-winter #iw-bag .bag-slot { min-height: 35px; }
+  #iskorka-winter #iw-bag #iw-bag-detail { padding: 7px 9px; grid-template-columns: 40px minmax(0,1fr); }
+  #iskorka-winter #iw-bag #iw-bag-detail :is(h3,p,strong,small) { line-height: 1.16; }
+  #iskorka-winter #iw-bag .bag-history { display: grid; grid-template-columns: minmax(0,1fr) auto; align-items: center; gap: 4px 9px; margin-top: 6px; }
+  #iskorka-winter #iw-bag .memory-heading { grid-area: 1 / 1; margin: 0; font-size: 1.05rem; }
+  #iskorka-winter #iw-bag .memories { grid-row: 2; grid-column: 1 / -1; grid-template-columns: repeat(4,minmax(0,1fr)); }
+  #iskorka-winter #iw-bag .memory { line-height: 1.12; }
+  #iskorka-winter #iw-bag .memory-pager { grid-area: 1 / 2; margin-top: 0; }
+  #iskorka-winter #iw-bag .memory-pager button { min-height: 34px; }
+}
+@media (min-width: 550px) and (max-height: 360px) {
+  #iskorka-winter #iw-bag .backpack { padding-block: 8px; }
+  #iskorka-winter #iw-bag .bag-history { margin-top: 4px; }
+  #iskorka-winter #iw-bag #iw-bag-detail { grid-template-columns: 32px minmax(0,1fr); row-gap: 2px; padding-block: 5px; }
+  #iskorka-winter #iw-bag #iw-bag-detail .object { grid-row: 1 / span 2; }
+  #iskorka-winter #iw-bag #iw-bag-detail :is(p,small) { grid-column: 1 / -1; }
+}
+
+#iskorka-winter :is(#iw-grades,#iw-history) .paper {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1.25dvh, 11px);
+  padding: clamp(12px, 2.6dvh, 24px) clamp(12px, 3vw, 30px);
+  max-height: calc(100dvh - 2 * var(--veil-edge));
+  overflow: auto;
+}
+#iskorka-winter :is(#iw-grades,#iw-history) .paper > :not(.rating-list,.history-scroll) { flex: none; margin-block: 0; }
+#iskorka-winter :is(#iw-grades,#iw-history) .paper h2 { padding-inline-end: 48px; font-size: clamp(1.45rem, 4vw, 1.85rem); }
+#iskorka-winter :is(#iw-grades,#iw-history) .paper .subtitle { line-height: 1.28; font-size: clamp(.93rem, 1.7vw, 1.05rem); }
+#iskorka-winter #iw-grades #iw-ratings {
+  flex: 1 1 auto;
+  min-height: 64px;
+  max-height: none;
+  padding: 0;
+  scroll-padding: 5px;
+  overscroll-behavior: contain;
+}
+#iskorka-winter #iw-grades #iw-ratings:has(.date-row:nth-child(2)) { min-height: clamp(98px, 27dvh, 137px); }
+#iskorka-winter #iw-grades .date-row { align-items: center; }
+#iskorka-winter #iw-grades .star { height: clamp(35px, 6.2dvh, 43px); }
+#iskorka-winter #iw-grades .no-class { min-height: 35px; }
+#iskorka-winter #iw-grades #iw-grade-total { min-height: 0; text-align: left; line-height: 1.2; padding-block: 2px; }
+#iskorka-winter #iw-grades #iw-launch { min-height: 44px; }
+#iskorka-winter #iw-grades .grade-help { padding-block: 0; }
+#iskorka-winter #iw-history .history-scroll { flex: 1 1 auto; min-height: 82px; max-height: min(52dvh, 400px); overscroll-behavior: contain; }
+#iskorka-winter #iw-history .history-scroll th { position: sticky; top: 0; z-index: 1; background: #1b3657; color: #d4e4f4; }
+#iskorka-winter #iw-history .history-scroll :is(th,td) { padding: 8px 7px; }
+#iskorka-winter #iw-history .history-note { line-height: 1.23; }
+#iskorka-winter #iw-history button[data-close]:last-child { align-self: start; min-height: 44px; }
+@media(min-width: 550px) {
+  #iskorka-winter #iw-grades .rating-actions { display: flex; align-items: center; gap: 8px; }
+  #iskorka-winter #iw-grades .date-row { padding-block: 5px; }
+}
+@media(max-height: 480px) {
+  #iskorka-winter #iw-grades :is(#iw-launch,.rules-trigger) { min-height: 42px; padding-block: 6px; }
+  #iskorka-winter #iw-history .history-scroll th,#iskorka-winter #iw-history .history-scroll td { padding-block: 5px; }
+}
+
+@media (min-width: 550px) and (max-height: 360px) {
+  #iskorka-winter #iw-grades .paper { padding-block: 10px; }
+  #iskorka-winter #iw-grades .paper .rules-trigger { position: absolute; inset: 10px 61px auto auto; width: auto; min-height: 38px; }
+  #iskorka-winter #iw-grades .paper h2 { padding-inline-end: 228px; }
+  #iskorka-winter #iw-grades .grade-help summary { min-height: 29px; }
+}
+
+/* The illustration and text start on the same line; navigation stays outside the scroll area. */
+#iskorka-winter #iw-reward.arrival .paper.reward {
+  width: min(1150px, 100%);
+  max-height: calc(100dvh - 2 * var(--veil-edge));
+  border-width: 1px;
+  border-radius: 18px;
+}
+#iskorka-winter #iw-reward.arrival .reward-scroll {
+  display: grid;
+  grid-template-columns: minmax(0,1.12fr) minmax(0,1fr);
+  align-items: start;
+  gap: clamp(12px, 2.2vw, 26px);
+  max-height: none;
+  padding: clamp(16px, 4dvh, 35px) clamp(12px, 2.35vw, 30px) clamp(12px, 2.5dvh, 22px);
+  scrollbar-color: #6c8aa9 #12243d;
+}
+#iskorka-winter #iw-reward #iw-reward-art { min-width: 0; }
+#iskorka-winter #iw-reward.arrival .quest-art { margin: 0; width: 100%; }
+#iskorka-winter #iw-reward.arrival .reward-text { min-width: 0; padding: 0; text-align: left; }
+#iskorka-winter #iw-reward.arrival .reward-text #iw-reward-kind { display: block; padding-inline-end: 42px; margin: 0 0 5px; }
+#iskorka-winter #iw-reward.arrival .reward-text h2 { padding: 0; margin: 0 0 8px; font-size: clamp(1.4rem, 2.8vw, 2.12rem); line-height: 1.12; }
+#iskorka-winter #iw-reward.arrival .reward-text #iw-reward-copy { margin: 0 0 9px; font-size: clamp(1rem, 1.55vw, 1.26rem); line-height: 1.3; }
+#iskorka-winter #iw-reward .reward-text #iw-question { margin: 3px 0 8px; line-height: 1.25; font-size: clamp(1rem, 1.45vw, 1.2rem); }
+#iskorka-winter #iw-reward .reward-text :is(#iw-together,#iw-rule-link) { margin-block: 8px 0; }
+#iskorka-winter #iw-reward .reward-text .quest-choice { min-height: 44px; padding: 6px 10px; line-height: 1.18; }
+#iskorka-winter #iw-reward.arrival .reward-footer { padding: 9px clamp(12px, 2.35vw, 30px) 12px; }
+#iskorka-winter #iw-reward .reward-footer #iw-continue span { text-wrap: balance; }
+#iskorka-winter #iw-intro .paper { padding-block: clamp(13px, 2.6dvh, 23px); }
+#iskorka-winter #iw-intro .intro-footer { margin-block-start: 10px; }
+@media(max-width: 555px) {
+  #iskorka-winter #iw-reward.arrival .reward-scroll { grid-template-columns: minmax(0,1fr); padding-block-start: 18px; align-content: start; }
+  #iskorka-winter #iw-reward.arrival .quest-art { width: min(100%, 76dvh); margin-inline: auto; }
+}
+@media(max-width: 555px) and (max-height: 655px) {
+  #iskorka-winter #iw-reward.arrival .reward-scroll { padding-block: 13px 9px; gap: 9px; }
+  #iskorka-winter #iw-reward.arrival .quest-art { width: min(100%, 37dvh); }
+  #iskorka-winter #iw-reward.arrival .reward-text #iw-reward-copy { margin-block-end: 6px; }
+  #iskorka-winter #iw-reward.arrival .reward-text h2 { margin-block-end: 6px; }
+}
+@media(min-width: 556px) and (max-height: 480px) {
+  #iskorka-winter #iw-reward.arrival .reward-scroll { grid-template-columns: minmax(0,.78fr) minmax(0,1.22fr); padding-block: 12px 8px; }
+  #iskorka-winter #iw-reward.arrival .reward-text h2 { margin-bottom: 5px; }
+  #iskorka-winter #iw-reward.arrival .reward-text #iw-reward-copy { margin-bottom: 6px; }
+  #iskorka-winter #iw-reward .reward-text .quest-choices { gap: 5px; }
+  #iskorka-winter #iw-reward .reward-text .quest-choice { min-height: 42px; }
+}
+
+@media(min-width: 550px) and (max-height: 360px) {
+  #iskorka-winter #iw-reward .reward-scroll #iw-choices:not([hidden]) { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); }
+  #iskorka-winter #iw-reward.arrival .reward-text #iw-reward-copy { line-height: 1.22; }
+}
+
+.night-book[open] { display: flex; flex-direction: column; max-height: calc(100dvh - 24px); }
+.night-book header,.night-book .rule-page-actions { flex: none; }
+.night-book header { gap: 10px; }
+.night-book :is(.book-rules,.rule-page) { min-height: 0; overflow: auto; overscroll-behavior: contain; }
+.night-book .rule-page-actions { padding: 9px clamp(14px, 3vw, 24px) 14px; }
+@media(max-height: 480px) {
+  .night-book header { padding-block: 9px; }
+  .night-book .rule-page { padding-block-start: 12px; }
+  .night-book .rule-page-emblem { float: left; width: 50px; height: 50px; margin: 0 11px 5px 0; }
+}
+
+#iskorka-winter #iw-map .map-top { inset-inline: var(--map-edge); }
+#iskorka-winter #iw-map .zoom-tools { inset-inline-end: var(--map-edge); }
+#iskorka-winter #iw-map .mode-tools { inset-inline-start: var(--map-edge); bottom: var(--map-bottom); }
+#iskorka-winter #iw-map .journey-dock { inset-inline-end: var(--map-edge); bottom: var(--map-bottom); }
+@media(max-width: 860px) { #iskorka-winter #iw-map .journey-dock { width: auto; min-width: 0; } }
+@media(max-width: 555px) {
+  #iskorka-winter #iw-map .mode-tools {
+    inset-inline: var(--map-edge);
+    bottom: calc(var(--map-bottom) + var(--dock-space, 92px) - 28px);
+    gap: 5px;
+  }
+  #iskorka-winter #iw-map .mode-tools > :is(.map-selector,button) { flex: 1 1 0; min-width: 0; }
+  #iskorka-winter #iw-map .mode-tools .game-button { padding-inline: 4px; font-size: clamp(.75rem, 3.65vw, .93rem); }
+  #iskorka-winter #iw-map .map-selector > span { justify-content: center; padding-inline: 4px; font-size: clamp(.75rem, 3.65vw, .93rem); white-space: nowrap; }
+  #iskorka-winter #iw-map .map-title { max-width: min(56vw, 295px); }
+}
 </style><div id="iskorka-winter" lang="ru" data-default-map="ridge" data-customer-demo>
  <details class="demo-control" id="iw-demo-controls"><summary>Режим показа</summary><div class="demo-inner">
   <div class="demo-heading"><a href="../archive.html">Предыдущий показ</a><strong id="iw-demo-heading"></strong><span id="iw-demo-calendar"></span></div>
@@ -1477,12 +1804,11 @@ body { margin: 0; padding: 0; max-width: none; background: #081124; }
  </details>
  <div class="game">
   <section class="scene home" id="iw-home" aria-label="Зимняя поляна Искорки">
-   <div class="night-hero"><h1>Дружные<br>перемены</h1><div class="team-day"><strong class="group">2 «Б»</strong><span id="iw-day">День 1</span></div><section class="home-rules" aria-labelledby="home-rules-title"><div class="home-section-heading"><h2 id="home-rules-title">Созвездия правил</h2><button type="button" class="rules-trigger" data-night-rule="" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Все правила">Все правила</button></div><ul class="constellation-shortcuts"><li><button type="button" class="rules-trigger" data-night-rule="rule-care" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Не дерёмся и не обижаем друг друга"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 34 12 23C8 19 9 13 14 11c4-2 8 0 10 4 2-4 6-6 10-4 5 2 6 8 2 12L24 34Z"/><circle cx="14" cy="11" r="1.9"/><circle cx="24" cy="34" r="1.9"/><circle cx="34" cy="11" r="1.9"/></svg><span>Не дерёмся и не обижаем друг друга</span></button></li><li><button type="button" class="rules-trigger" data-night-rule="rule-quiet" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Не носимся и не кричим"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 36l9-7-3-7 7-6 7 4m-11 9 8 3-1 8m-10-18-7 3m13-15 4-3 4 3-4 4Z"/><circle cx="12" cy="36" r="1.9"/><circle cx="28" cy="40" r="1.9"/><circle cx="32" cy="20" r="1.9"/></svg><span>Не носимся и не кричим</span></button></li><li><button type="button" class="rules-trigger" data-night-rule="rule-play" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Играем вместе и дружно"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6l4 11 11 2-9 7 2 11-8-6-8 6 2-11-9-7 11-2Z"/><circle cx="24" cy="6" r="1.9"/><circle cx="39" cy="19" r="1.9"/><circle cx="9" cy="19" r="1.9"/></svg><span>Играем вместе и дружно</span></button></li><li><button type="button" class="rules-trigger" data-night-rule="rule-help" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Помогаем друг другу и не боимся просить помощи"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="m8 26 8-11 9 5 4-4 11 9-9 11H20L8 26Zm9-9 7 6 4 1 2 5 5 3"/><circle cx="8" cy="26" r="1.9"/><circle cx="16" cy="15" r="1.9"/><circle cx="40" cy="25" r="1.9"/><circle cx="31" cy="36" r="1.9"/></svg><span>Помогаем друг другу и не боимся просить помощи</span></button></li><li><button type="button" class="rules-trigger" data-night-rule="rule-ready" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="По звонку быстро готовимся к уроку"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 29c3-2 4-6 4-9 0-6 3-9 8-9s8 3 8 9c0 3 1 7 4 9H12Zm8 4c2 4 6 4 8 0M24 6v5m-16 3-3-2m35 2 3-2"/><circle cx="24" cy="6" r="1.9"/><circle cx="5" cy="12" r="1.9"/><circle cx="43" cy="12" r="1.9"/><circle cx="24" cy="35" r="1.9"/></svg><span>По звонку быстро готовимся к уроку</span></button></li></ul></section></div><div class="night-score"><button class="star-total" data-action="history" aria-label="Посмотреть звёзды по дням"><i data-lucide="star" aria-hidden="true"></i><span id="iw-stars">0</span><small>Всего звёзд</small></button></div>
+   <div class="home-reading"><div class="night-hero"><h1><span>Дружные</span> <span>перемены</span></h1><div class="team-day"><strong class="group">2 «Б»</strong><span id="iw-day">День 1</span></div><section class="home-rules" aria-labelledby="home-rules-title"><div class="home-section-heading"><h2 id="home-rules-title">Созвездия правил</h2><button type="button" class="rules-trigger" data-night-rule="" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Все правила">Все правила</button></div><ul class="constellation-shortcuts"><li><button type="button" class="rules-trigger" data-night-rule="rule-care" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Не дерёмся и не обижаем друг друга"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 34 12 23C8 19 9 13 14 11c4-2 8 0 10 4 2-4 6-6 10-4 5 2 6 8 2 12L24 34Z"/><circle cx="14" cy="11" r="1.9"/><circle cx="24" cy="34" r="1.9"/><circle cx="34" cy="11" r="1.9"/></svg><span>Не дерёмся и не обижаем друг друга</span></button></li><li><button type="button" class="rules-trigger" data-night-rule="rule-quiet" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Не носимся и не кричим"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 36l9-7-3-7 7-6 7 4m-11 9 8 3-1 8m-10-18-7 3m13-15 4-3 4 3-4 4Z"/><circle cx="12" cy="36" r="1.9"/><circle cx="28" cy="40" r="1.9"/><circle cx="32" cy="20" r="1.9"/></svg><span>Не носимся и не кричим</span></button></li><li><button type="button" class="rules-trigger" data-night-rule="rule-play" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Играем вместе и дружно"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M24 6l4 11 11 2-9 7 2 11-8-6-8 6 2-11-9-7 11-2Z"/><circle cx="24" cy="6" r="1.9"/><circle cx="39" cy="19" r="1.9"/><circle cx="9" cy="19" r="1.9"/></svg><span>Играем вместе и дружно</span></button></li><li><button type="button" class="rules-trigger" data-night-rule="rule-help" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Помогаем друг другу и не боимся просить помощи"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="m8 26 8-11 9 5 4-4 11 9-9 11H20L8 26Zm9-9 7 6 4 1 2 5 5 3"/><circle cx="8" cy="26" r="1.9"/><circle cx="16" cy="15" r="1.9"/><circle cx="40" cy="25" r="1.9"/><circle cx="31" cy="36" r="1.9"/></svg><span>Помогаем друг другу и не боимся просить помощи</span></button></li><li><button type="button" class="rules-trigger" data-night-rule="rule-ready" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="По звонку быстро готовимся к уроку"><svg class="constellation-icon" viewBox="0 0 48 48" aria-hidden="true"><path d="M12 29c3-2 4-6 4-9 0-6 3-9 8-9s8 3 8 9c0 3 1 7 4 9H12Zm8 4c2 4 6 4 8 0M24 6v5m-16 3-3-2m35 2 3-2"/><circle cx="24" cy="6" r="1.9"/><circle cx="5" cy="12" r="1.9"/><circle cx="43" cy="12" r="1.9"/><circle cx="24" cy="35" r="1.9"/></svg><span>По звонку быстро готовимся к уроку</span></button></li></ul></section></div><div class="night-score"><button class="star-total" data-action="history" aria-label="Посмотреть звёзды по дням"><i data-lucide="star" aria-hidden="true"></i><span id="iw-stars">0</span><small>Всего звёзд</small></button></div>
    <div class="chapter"><small>Глава 1 · Маяк звёзд</small><h1 id="iw-home-title">Зимняя тропинка</h1><p id="iw-home-subtitle">Вернём зимнему лесу свет</p></div>
    <div class="speech" id="iw-speech" hidden>В зимнем лесу погас Маяк звёзд. Давайте снова его зажжём!</div>
    <button class="hero-button" id="iw-hello" aria-label="Поздороваться с Искоркой"><img id="iw-fox-home" alt="Искорка с картой в рюкзаке"></button>
-   <section class="home-findings" aria-labelledby="home-findings-title"><div class="home-section-heading"><h2 id="home-findings-title">Находки в пути</h2><span id="iw-kit-label"></span></div><ul class="findings-list" id="iw-stump"></ul></section><button class="home-resume" id="iw-home-resume" hidden>Продолжить прошлую прогулку</button>
-   <div class="home-dock"><button class="game-button gold home-go" id="iw-home-go"><i data-lucide="star" aria-hidden="true"></i><span>Звёзды за день</span></button><span class="home-status" id="iw-home-status" hidden></span></div>
+   <section class="home-findings" aria-labelledby="home-findings-title"><div class="home-section-heading"><h2 id="home-findings-title">Находки в пути</h2><span id="iw-kit-label"></span></div><ul class="findings-list" id="iw-stump"></ul></section></div><div class="home-dock"><button class="game-button gold home-go" id="iw-home-go"><i data-lucide="star" aria-hidden="true"></i><span>Звёзды за день</span></button><button class="home-resume" id="iw-home-resume" hidden>Продолжить прошлую прогулку</button><span class="home-status" id="iw-home-status" hidden></span></div>
   </section>
   <section class="scene map" id="iw-map" hidden aria-label="Карта зимнего приключения">
    <div class="map-top"><button class="game-button" data-action="home" aria-label="Вернуться на поляну"><i data-lucide="arrow-left" aria-hidden="true"></i><span>На поляну</span></button><div class="map-title"><span id="iw-location">Берёзовая поляна</span><small id="iw-map-count">Пройдено 0 из 100 шагов</small></div></div>
@@ -1553,10 +1879,10 @@ body { margin: 0; padding: 0; max-width: none; background: #081124; }
   <div class="veil" id="iw-intro" hidden><section class="paper intro" role="dialog" aria-modal="true" aria-labelledby="iw-intro-title"><button class="close" data-close aria-label="Закрыть начало истории"><i data-lucide="x" aria-hidden="true"></i></button><small id="iw-intro-count">1 / 4</small><h2 id="iw-intro-title"></h2><div id="iw-intro-art"></div><p id="iw-intro-copy"></p><div class="intro-footer"><button type="button" class="game-button story-back" id="iw-intro-back" disabled><span>Назад</span></button><button class="game-button green" id="iw-intro-next"><i data-lucide="play" aria-hidden="true"></i><span>Дальше</span></button></div></section></div>
   <div class="transition-cover" id="iw-transition"></div>
   <div class="veil" id="iw-grades" hidden><section class="paper" role="dialog" aria-modal="true" aria-labelledby="iw-grade-title"><button class="close" data-close aria-label="Закрыть оценки"><i data-lucide="x" aria-hidden="true"></i></button><h2 id="iw-grade-title">Наши звёзды</h2><p class="subtitle">Вспомним, что сегодня получилось вместе</p><button type="button" class="rules-trigger" data-night-rule="" aria-haspopup="dialog" aria-controls="walk-rule-book" aria-label="Вспомнить правила">Вспомнить правила</button><div class="rating-list" id="iw-ratings"></div><p class="grade-total" id="iw-grade-total">Выберите звёзды за каждый день</p><button class="game-button gold grade-go" id="iw-launch" disabled><i data-lucide="play" aria-hidden="true"></i><span>В путь</span></button><details class="grade-help"><summary>Подсказка</summary><p>Вспомните пять правил и выберите одну общую оценку за день. Отдельные галочки по правилам не нужны. 1 — пока трудно, но пробовали; 2 — иногда получалось; 3 — часто получалось; 4 — почти всегда; 5 — справились вместе. Назовите конкретный хороший поступок. Искорка рада каждому шагу.</p></details></section></div>
-  <div class="veil" id="iw-bag" hidden><section class="paper backpack" role="dialog" aria-modal="true" aria-labelledby="iw-bag-title"><button class="close" data-close aria-label="Закрыть рюкзак"><i data-lucide="x" aria-hidden="true"></i></button><h2 id="iw-bag-title">Рюкзак Искорки</h2><p class="subtitle">Каждая находка помогает нам идти к Маяку</p><div class="bag-layout"><div><div class="bag-grid" id="iw-bag-grid"></div><p class="bag-caption" id="iw-bag-caption">Какие находки ждут нас дальше?</p></div><div class="bag-detail" id="iw-bag-detail"></div></div><h3 class="memory-heading" id="iw-memory-heading" hidden>Наша история</h3><div class="memories" id="iw-memories" aria-label="Наши воспоминания"></div><nav class="memory-pager" id="iw-memory-pager" aria-label="Страницы нашей истории" hidden>
+  <div class="veil" id="iw-bag" hidden><section class="paper backpack" role="dialog" aria-modal="true" aria-labelledby="iw-bag-title"><button class="close" data-close aria-label="Закрыть рюкзак"><i data-lucide="x" aria-hidden="true"></i></button><h2 id="iw-bag-title">Рюкзак Искорки</h2><p class="subtitle">Каждая находка помогает нам идти к Маяку</p><div class="bag-layout"><div><div class="bag-grid" id="iw-bag-grid"></div><p class="bag-caption" id="iw-bag-caption">Какие находки ждут нас дальше?</p></div><div class="bag-detail" id="iw-bag-detail"></div></div><div class="bag-history"><h3 class="memory-heading" id="iw-memory-heading" hidden>Наша история</h3><div class="memories" id="iw-memories" aria-label="Наши воспоминания"></div><nav class="memory-pager" id="iw-memory-pager" aria-label="Страницы нашей истории" hidden>
 <button type="button" id="iw-memory-prev" aria-label="Предыдущие истории">Назад</button>
 <span id="iw-memory-page" aria-live="polite"></span>
-<button type="button" id="iw-memory-next" aria-label="Следующие истории">Дальше</button></nav></section></div>
+<button type="button" id="iw-memory-next" aria-label="Следующие истории">Дальше</button></nav></div></section></div>
   <div class="veil" id="iw-history" hidden><section class="paper history" role="dialog" aria-modal="true" aria-labelledby="iw-history-title"><button class="close" data-close aria-label="Закрыть итоги"><i data-lucide="x" aria-hidden="true"></i></button><h2 id="iw-history-title">Звёзды по дням</h2><p class="subtitle" id="iw-history-summary"></p><p class="history-waiting" id="iw-history-waiting" hidden></p><div class="history-scroll"><table><thead><tr><th scope="col">Учебный день</th><th scope="col">Оценка</th><th scope="col">Начислено</th></tr></thead><tbody id="iw-history-rows"></tbody></table><p class="history-empty" id="iw-history-empty" hidden>Пока нет оценок. Первые звёзды начнут наше путешествие.</p></div><p class="history-note" id="iw-history-note">Одна запись на учебный день.</p><button class="game-button green" data-close>Вернуться</button></section></div>
   <div class="veil" id="iw-confirm" hidden><section class="paper confirmation" role="dialog" aria-modal="true" aria-labelledby="iw-confirm-title"><h2 id="iw-confirm-title"></h2><p id="iw-confirm-copy"></p><div class="confirm-actions"><button class="game-button" data-close>Отмена</button><button class="game-button green" id="iw-confirm-accept">Подтвердить</button></div></section></div>
   <div class="notice" id="iw-notice" role="status" hidden></div>
@@ -1824,7 +2150,7 @@ lucide.createIcons({icons});\``);if(typeof c>"u")throw new Error("`createIcons()
  const plural=(n,forms)=>{const a=n%100,b=n%10;return n+' '+(a>10&&a<20?forms[2]:b===1?forms[0]:b>=2&&b<=4?forms[1]:forms[2]);};
  const days=n=>plural(n,['день','дня','дней']),stars=n=>plural(n,['звёздочка','звёздочки','звёздочек']);
  function focusControl(q){requestAnimationFrame(()=>{const el=typeof q==='string'?$(q):q;if(el?.isConnected&&el.getClientRects().length&&!el.closest('[inert]'))el.focus({preventScroll:true});});}
- function focusModalView(){requestAnimationFrame(()=>requestAnimationFrame(()=>{if(!modal)return;const card=$('#iw-'+modal+' .paper');if(!card?.getClientRects().length)return;card.scrollIntoView({block:'center',behavior:'instant'});const box=card.getBoundingClientRect();if(window.parent!==window)window.parent.postMessage({type:'iskorka-focus-modal',top:box.top,height:box.height},'*');}));}
+ function focusModalView(){requestAnimationFrame(()=>requestAnimationFrame(()=>{if(!modal)return;const card=$('#iw-'+modal+' .paper');if(!card?.getClientRects().length)return;if(window.parent!==window){card.scrollIntoView({block:'center',behavior:'instant'});const box=card.getBoundingClientRect();window.parent.postMessage({type:'iskorka-focus-modal',top:box.top,height:box.height},'*');}}));}
  function notice(text){clearTimeout(noticeTimer);$('#iw-notice').textContent=text;$('#iw-notice').hidden=false;noticeTimer=setTimeout(()=>$('#iw-notice').hidden=true,4000);say(text);}
  function clearTransient(){clearTimeout(speechTimer);clearTimeout(noticeTimer);clearTimeout(continueTimer);continueUnlockAt=0;ferryRideStart=null;bridgeStart=null;$('#iw-speech').hidden=true;$('#iw-notice').hidden=true;}
  function cancelTransition(){clearTimeout(transitionTimer);clearTimeout(coverTimer);transitionToken++;$('#iw-transition').classList.remove('active');}
@@ -2415,6 +2741,8 @@ lucide.createIcons({icons});\``);if(typeof c>"u")throw new Error("`createIcons()
     pages.forEach(page => { page.hidden = page.dataset.rulePage !== id; });
     if (!rule) list.querySelectorAll('details[open]').forEach(entry => { entry.open = false; });
     book.scrollTop = 0;
+    const panel = pages.find(page => !page.hidden) ?? list;
+    panel.scrollTop = 0;
     title.focus({preventScroll: true});
   }
 
