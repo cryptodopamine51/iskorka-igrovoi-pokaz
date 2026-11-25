@@ -1,4 +1,4 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,"><title>Дружные перемены · Искорка</title><meta name="iskorka-release" content="9.7.0"><style>#iskorka-winter .rules-trigger {
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,"><title>Дружные перемены · Искорка</title><meta name="iskorka-release" content="9.7.1"><style>#iskorka-winter .rules-trigger {
   color: #294c3a;
   background: #fff7dd;
   border: 2px solid #bfa877;
@@ -1812,7 +1812,7 @@ html:has(#iskorka-winter .veil:not([hidden])) { overflow: hidden; }
 @media(min-width:761px) and (min-height:656px){
  #iskorka-winter #iw-home .night-hero {
   display:grid;grid-template-columns:minmax(0,clamp(240px,22vw,280px)) max-content minmax(0,1fr);grid-template-areas:"title class ." "rules rules rules";
-  column-gap:clamp(6px,1.1vw,14px);width:min(100%,700px);align-items:start;margin-inline:auto;
+  column-gap:clamp(6px,1.1vw,14px);width:min(100%,700px);align-items:start;margin-inline:0 auto;
  }
  #iskorka-winter #iw-home .night-hero h1 { grid-area:title;margin-bottom:12px; }
  #iskorka-winter #iw-home .team-day {
@@ -1860,6 +1860,8 @@ html:has(#iskorka-winter .veil:not([hidden])) { overflow: hidden; }
   display:block;width:100%;height:auto;max-height:420px;object-fit:contain;
 }
 #iskorka-winter #iw-reward.arrival .reward-text { padding:clamp(14px,2.1vw,24px) clamp(16px,2.4vw,30px) 14px; }
+
+#iskorka-winter #iw-encounters .waypoint-finding { filter:grayscale(1); opacity:.55; }
 </style><div id="iskorka-winter" lang="ru" data-default-map="ridge" data-customer-demo>
  <details class="demo-control" id="iw-demo-controls"><summary>Режим показа</summary><div class="demo-inner">
   <div class="demo-heading"><a href="./archive.html">Предыдущий показ</a><strong id="iw-demo-heading"></strong><span id="iw-demo-calendar"></span></div>
@@ -2323,7 +2325,7 @@ lucide.createIcons({icons});\``);if(typeof c>"u")throw new Error("`createIcons()
    svg('path',{d:'M0-22 15-9 12 7 0 15-12 7-15-9Z',fill:palette,stroke:'#e8dbf7','stroke-width':2},el);
    svg('path',{d:'M0-20 4-7 12-7 5-1 8 8 0 2-8 8-5-1-12-7-4-7Z',fill:'#f6ecff',opacity:.82},el);
  }
- function createMapClues(root,C,assets){
+ function createMapClues(root,C,assets,findings){
    const group=root.querySelector('#iw-encounters');
    const caption=root.querySelector('#iw-upcoming');
    const stops=new Map(C.EVENTS.map(event=>[event.id,event]));
@@ -2336,9 +2338,9 @@ lucide.createIcons({icons});\``);if(typeof c>"u")throw new Error("`createIcons()
        svg('image',{class:'waypoint-image',href:assets[clue.art],x:-height*.56,y:-height,width:height*1.12,height,preserveAspectRatio:'xMidYMax meet'},el);
        const token=svg('g',{class:'waypoint-token mystery'},el);
        move(token,-30,-5,.72);
-       paintToken(token,'mystery','#b5c4d4');
+       svg('image',{class:'waypoint-finding',href:findings[id],x:-28,y:-28,width:56,height:56,preserveAspectRatio:'xMidYMid meet'},token);
      }else if(isItem){
-       paintToken(svg('g',{class:'waypoint-token mystery'},el),'mystery','#b5c4d4');
+       svg('image',{class:'waypoint-finding',href:findings[id],x:-28,y:-56,width:56,height:56,preserveAspectRatio:'xMidYMid meet'},svg('g',{class:'waypoint-token'},el));
      }else if(['fire','hill','crystal'].includes(clue.art)){
        paintToken(svg('g',{class:'waypoint-token'},el),clue.art,'#9382d8');
      }else{
@@ -2378,7 +2380,7 @@ lucide.createIcons({icons});\``);if(typeof c>"u")throw new Error("`createIcons()
  const root=document.getElementById('iskorka-winter'),C=globalThis.IskorkaWinterCore;
  const $=q=>root.querySelector(q),$$=q=>[...root.querySelectorAll(q)],NS='http://www.w3.org/2000/svg';
  const A=globalThis.IskorkaNightArt;
- const trail=C.expedition,clues=globalThis.IskorkaMapClues(root,C,globalThis.IskorkaEncounters);
+ const trail=C.expedition,clues=globalThis.IskorkaMapClues(root,C,globalThis.IskorkaEncounters,A.findings);
  for(const [key,asset] of Object.entries({goal:A.goalLit, 'night-cover':A.cover, objects:A.objects, story:A.story})){
   root.style.setProperty('--'+key,`url("${asset}")`);
  }
