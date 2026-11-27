@@ -1,4 +1,4 @@
-<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,"><title>Дружные перемены · Искорка</title><meta name="iskorka-release" content="9.12.1"><style>#iskorka-winter .rules-trigger {
+<!doctype html><html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex,nofollow"><link rel="icon" href="data:,"><title>Дружные перемены · Искорка</title><meta name="iskorka-release" content="9.12.2"><style>#iskorka-winter .rules-trigger {
   color: #294c3a;
   background: #fff7dd;
   border: 2px solid #bfa877;
@@ -59,6 +59,27 @@
 #iskorka-winter [data-encounter="crystal"] .waypoint-finding {
   filter: brightness(1.32) drop-shadow(0 0 1.5px #5ce2fa);
 }
+</style><style id="iskorka-map-switch">
+#iskorka-winter #iw-map-switch-status {
+  position: absolute;
+  z-index: 5;
+  top: clamp(60px, 10svh, 88px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: max-content;
+  max-width: calc(100% - 24px);
+  margin: 0;
+  padding: 8px 13px;
+  border: 1px solid #637796;
+  border-radius: 10px;
+  background: #15253e;
+  color: #fff4db;
+  text-align: center;
+  font-size: .9rem;
+  line-height: 1.35;
+  pointer-events: none;
+}
+#iskorka-winter #iw-settings-map-switch-status { margin: 6px 0; }
 </style></head><body><style>html{background:#eaf1ea}body{margin:0;padding:clamp(8px,1.5vw,24px);max-width:1720px;margin-inline:auto}#iskorka-winter{--atlas-height:calc(100dvh - 32px)}#iskorka-winter .quest-choice[aria-pressed="true"]{background:#d8ecd3;border-color:#4d8058}#iw-continue:disabled{opacity:.55}#iw-demo-controls .walk-back{justify-self:start;color:#305a48;font-weight:700}#iw-demo-controls .demo-heading{display:grid;gap:2px}</style><style>
 @font-face{font-family:Iskorka;src:url('./walk/assets/fcc9c00a9ad6e78673fa.ttf') format('truetype');font-weight:400;font-display:swap}
 @font-face{font-family:Iskorka;src:url('./walk/assets/a3302bd8424e6a37704e.ttf') format('truetype');font-weight:700;font-display:swap}
@@ -2328,6 +2349,7 @@ html:has(#iskorka-winter .veil:not([hidden])) { overflow: hidden; }
   </section>
   <section class="scene map" id="iw-map" hidden aria-label="Карта зимнего приключения">
    <div class="map-top"><button class="game-button" data-action="home" aria-label="Вернуться на поляну"><i data-lucide="arrow-left" aria-hidden="true"></i><span>На поляну</span></button><div class="map-title"><span id="iw-location">Берёзовая поляна</span><small id="iw-map-count">Пройдено 0 из 100 шагов</small><small id="iw-upcoming" class="sr" aria-live="polite" hidden></small></div></div>
+   <p id="iw-map-switch-status" role="status" aria-atomic="true" hidden></p>
    <div class="map-viewport" id="iw-map-viewport">
    <svg class="world" id="iw-world" role="img" aria-label="Зимняя тропа к Маяку. Каждый новый след отмечает пройденный шаг" viewBox="0 0 1024 1536" preserveAspectRatio="none">
     <defs>
@@ -2456,6 +2478,7 @@ html:has(#iskorka-winter .veil:not([hidden])) { overflow: hidden; }
    <div class="teacher-primary"><button class="game-button" id="iw-end-demo" hidden>Вернуться к классу</button><strong id="iw-demo-date"></strong><button class="game-button" data-action="history">Итоги дней</button><button class="game-button" id="iw-replay-intro">Начало истории</button></div>
    <p class="teacher-note">Даты идут по будням. Для каждой даты выберите от одной до пяти звёзд или отметьте «Занятий не было».</p>
    <div class="route-choice" aria-label="Вид карты"><span>Вид карты</span><button data-map-variant="ridge" aria-pressed="true">Звёздный перевал</button><button data-map-variant="forest" aria-pressed="false">Сияние над елями</button><button data-map-variant="valley" aria-pressed="false">Лунная долина</button></div>
+   <p id="iw-settings-map-switch-status" role="status" aria-atomic="true" hidden></p>
    <div class="backup-tools"><button class="game-button" id="iw-export">Сохранить копию</button><button class="game-button" id="iw-import">Загрузить копию</button><input id="iw-import-file" type="file" accept="application/json,.json" hidden><p id="iw-import-status" role="status"></p></div>
 
   </div>
@@ -3053,7 +3076,10 @@ Object.assign(globalThis.IskorkaStoryWorldAssets, {"spruce": "./walk/assets/v99-
  const motion=matchMedia('(prefers-reduced-motion: reduce)'),svg=$('#iw-world');let reduce=motion.matches;
  let s=C.create('first',root.dataset.defaultMap),modal=null,selected='map',lastFocus=null,ownRev='',animTime=0,lastTime=0,lastCheckpoint=C.START,transitionTimer=0,speechTimer=0,momentTimer=0,introStep=0,coverTimer=0,transitionToken=0,noticeTimer=0,continueTimer=0,continueUnlockAt=0,replayResolved=false,confirmAction=null,introReplay=false;
  const sceneImages=globalThis.IskorkaSceneImages,mapImages=globalThis.IskorkaMapImages,surroundings=globalThis.IskorkaSurroundings,pathTextures=globalThis.IskorkaPathTextures;
- let ferryRideStart=null,bridgeStart=null;
+ const straightBridgeArt="./walk/assets/terrain/straight-bridge.webp";
+ const campClearingSites={"ridge": ["./walk/assets/terrain/ridge-clearing.webp", 1450, 416], "forest": ["./walk/assets/terrain/forest-clearing.webp", 1358, 291], "valley": ["./walk/assets/terrain/valley-clearing.webp", 1490, 364]};
+ const forestSummitArt="./walk/assets/map/v912-forest-summit.webp";
+ let ferryRideStart=null,bridgeStart=null,mapRequest=null;
  let classBeforeExample=null,memoryPage=0;
  const compactBag=matchMedia('(max-width: 670px) and (max-height: 610px)');
  const memoriesPerPage=()=>compactBag.matches?4:6;
@@ -3095,7 +3121,7 @@ Object.assign(globalThis.IskorkaStoryWorldAssets, {"spruce": "./walk/assets/v99-
  }if(inDemo()){storageStatus('Демонстрация · временные оценки');return;}ownRev=Date.now()+':'+Math.random();ownRevisions.add(ownRev);if(ownRevisions.size>200)ownRevisions.delete(ownRevisions.values().next().value);const rev=ownRev,snap={kind:'iskorka-lighthouse-8',rev,state:JSON.parse(JSON.stringify(s)),camera:{...desired}};const data={modelContent:{prototype:'lighthouse-v8',mapVariant:s.mapVariant,day:s.day,page:s.page,position:Math.floor(s.position),cameraMode:s.mode,collected:s.collected},privateContent:snap};storageStatus('Сохраняем…','pending');const success=()=>{if(rev===ownRev)storageStatus('Сохранено на этом устройстве');};const failure=()=>{if(rev===ownRev){storageStatus('Не удалось сохранить. Сохраните копию файла.','error');notice('Прогресс пока не сохранён. Откройте «Для учителя» и сохраните копию.');}};if(window.openai?.setWidgetState){try{Promise.resolve(window.openai.setWidgetState(data)).then(success,failure);}catch{failure();}}else{try{localStorage.setItem('iskorka-lighthouse-8',JSON.stringify(data));success();}catch{failure();}}}
  function restore(data){if(inDemo())return false;const p=data?.privateContent;if(p?.kind!=='iskorka-lighthouse-8'||ownRevisions.has(p.rev))return false;const next=C.restore(p.state);if(!next)return false;cancelTransition();clearTransient();s=next;C.syncDay(s);configureMap();modal=null;lastCheckpoint=Math.floor(s.position);if(p.camera&&['x','y','w'].every(k=>Number.isFinite(p.camera[k])))desired={x:p.camera.x,y:p.camera.y,w:Math.max(250,Math.min(4000,p.camera.w))};else{const at=point(s.position);desired={x:at.x,y:at.y,w:followWidth()};}camera={...desired};render();reopenSavedReward();storageStatus('Прогресс восстановлен на этом устройстве');return true;}
  function askReplace(title,copy,action){confirmAction=action;$('#iw-confirm-title').textContent=title;$('#iw-confirm-copy').textContent=copy;openModal('confirm');}
- function installState(next){cancelTransition();clearTransient();clearTimeout(momentTimer);s=next;if(inDemo())s.clock='demo';C.syncDay(s);modal=null;selected='map';lastCheckpoint=Math.floor(s.position);configureMap();const at=point(s.position);camera={x:at.x,y:at.y,w:followWidth()};desired={...camera};render();save();}
+ function installState(next){cancelMapSwitch();cancelTransition();clearTransient();clearTimeout(momentTimer);s=next;if(inDemo())s.clock='demo';C.syncDay(s);modal=null;selected='map';lastCheckpoint=Math.floor(s.position);configureMap();const at=point(s.position);camera={x:at.x,y:at.y,w:followWidth()};desired={...camera};render();save();}
  function downloadBackup(){C.pause(s);const backup={format:'iskorka-lighthouse-save',version:1,savedAt:new Date().toISOString(),state:JSON.parse(JSON.stringify(s))},blob=new Blob([JSON.stringify(backup,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),link=document.createElement('a');link.href=url;link.download='iskorka-lighthouse-'+C.dateISO(s)+'-copy.json';link.addEventListener('click',event=>event.stopPropagation());root.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),10000);renderMapUI();save();notice('Копия подготовлена. Сохраните JSON-файл в надёжном месте.');}
  async function readBackup(file){if(!file)return;const output=$('#iw-import-status');output.textContent='Проверяем копию…';try{if(file.size>1024*1024)throw Error('Файл слишком большой. Нужна JSON-копия Искорки.');const backup=JSON.parse(await file.text());if(backup.format!=='iskorka-lighthouse-save'||backup.version!==1)throw Error('Это не копия истории «Маяк звёзд».');const next=C.restore(backup.state);if(!next)throw Error('Копия повреждена или содержит несовместимый прогресс.');output.textContent='Копия проверена: '+C.dateFor(next)+', '+stars(next.stars)+'.';askReplace('Загрузить эту копию?','Текущая история на этом устройстве будет заменена. В копии '+stars(next.stars)+' и '+Math.floor(next.position)+' пройденных шагов.',()=>{installState(next);output.textContent='Копия загружена.';notice('Копия загружена. Можно продолжать путешествие.');});}catch(error){output.textContent=error instanceof SyntaxError?'Не удалось прочитать JSON. Выберите файл, созданный кнопкой «Сохранить копию».':error.message;say(output.textContent);}finally{$('#iw-import-file').value='';}}
  function syncCurrentDay(){if(C.syncDay(s)){cancelTransition();clearTransient();modal=null;render();save();notice('Наступил новый учебный день. Прошлые даты ждут вашего итога.');}}
@@ -3118,7 +3144,7 @@ Object.assign(globalThis.IskorkaStoryWorldAssets, {"spruce": "./walk/assets/v99-
   $('#iw-home-subtitle').textContent=finished?'Свет снова помогает лесным друзьям':'Вернём зимнему лесу свет';
   $('#iw-speech').textContent=finished?'Спасибо, команда! Вместе мы вернули Маяку свет.':s.resolved.includes('crystal')?'Кристалл из ледяной пещеры поможет нам вернуть Маяку свет!':s.resolved.includes('shovel')?'Мы помогли Зайчонку откопать вход в норку. Пойдём дальше!':s.resolved.includes('rope')?'Хорошо, что верёвка у нас с собой. Пойдём дальше!':s.resolved.includes('thermos')?'Как хорошо согреться на привале и поделиться теплом.':s.resolved.includes('westFork')?'Компас помог нам пойти прямо, на север.':s.resolved.includes('mooseCave')?'Мы помогли Лосёнку пройти через пещеру.':s.resolved.includes('compass')?'С компасом мы сможем найти нужную дорогу.':s.resolved.includes('lantern')?'С фонариком мы разглядим дорогу даже в темноте.':'В зимнем лесу погас Маяк звёзд. Давайте снова его зажжём!';
   renderFindings();
-  $('#iw-map-variant').value=s.mapVariant;
+  $('#iw-map-variant').value=mapRequest?.variant??s.mapVariant;
   $$('[data-map-variant]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mapVariant===s.mapVariant));
   $('#iw-nextday').disabled=s.day>=C.MAX_DAYS;$('#iw-skipdays').disabled=s.day>C.MAX_DAYS-3;
   $('#iw-demo-status').textContent=finished?(s.days?'Глава пройдена · можно добавить звёзды':'Маяк зажжён · наша история сохранена'):s.days>1?'Ждут оценки: '+days(s.days):s.pending?'Показ остановлен на событии':s.position<s.target?'Есть непройденные шаги':s.credited?'Сегодня уже оценено':'Можно поставить оценку';
@@ -3332,8 +3358,8 @@ Object.assign(globalThis.IskorkaStoryWorldAssets, {"spruce": "./walk/assets/v99-
   renderModal();if(modal==='bag')renderBag();if(modal==='grades')renderRatings();if(modal==='history')renderHistory();icons();draw(1);
  }
  function transition(to){cancelTransition();const token=transitionToken,cover=$('#iw-transition');if(reduce){to();return;}void cover.offsetWidth;cover.classList.add('active');transitionTimer=setTimeout(()=>{if(token===transitionToken)to();},330);coverTimer=setTimeout(()=>{if(token===transitionToken)cover.classList.remove('active');},850);}
- function home(){cancelTransition();clearTimeout(momentTimer);bridgeStart=null;C.pause(s);modal=null;s.page='home';render();$('.home-reading').scrollTop=0;focusControl($('#iw-home-go').hidden?'#iw-show-forest':'#iw-home-go');save();}
- function travel(){modal=null;s.page='map';s.mode='follow';const p=point(s.position);desired={x:p.x,y:p.y-45,w:followWidth()};transition(()=>{render();if(s.pending){modal='reward';renderReward();renderModal();focusControl('#iw-continue');}else if(s.position<s.target&&!document.hidden){C.resume(s);renderMapUI();focusControl('#iw-map-go');}save();});}
+ function home(){cancelMapSwitch();cancelTransition();clearTimeout(momentTimer);bridgeStart=null;C.pause(s);modal=null;s.page='home';render();$('.home-reading').scrollTop=0;focusControl($('#iw-home-go').hidden?'#iw-show-forest':'#iw-home-go');save();}
+ function travel(){cancelMapSwitch();modal=null;s.page='map';s.mode='follow';const p=point(s.position);desired={x:p.x,y:p.y-45,w:followWidth()};transition(()=>{render();if(s.pending){modal='reward';renderReward();renderModal();focusControl('#iw-continue');}else if(s.position<s.target&&!document.hidden){C.resume(s);renderMapUI();focusControl('#iw-map-go');}save();});}
  function svgEl(tag,attrs,parent){const e=document.createElementNS(NS,tag);for(const [k,v] of Object.entries(attrs))e.setAttribute(k,v);parent.append(e);return e;}
  const nodeEls=[],bridgeMarks=[];
  let sceneryBounds,lastFogDraw;
@@ -3385,18 +3411,18 @@ Object.assign(globalThis.IskorkaStoryWorldAssets, {"spruce": "./walk/assets/v99-
   bridge.setAttribute('href',globalThis.IskorkaBridgeArt[m.id]);
   setBox(bridge,overlay.x,overlay.y,overlay.width,overlay.height);
   const straightBridge=$('#iw-straight-bridge');
-  straightBridge.setAttribute('href',"./walk/assets/terrain/straight-bridge.webp");
+  straightBridge.setAttribute('href',straightBridgeArt);
   const span=to.x-from.x,slope=(to.y-from.y)/span,bridgeHeight=51;
   setBox(straightBridge,from.x+2,from.y-bridgeHeight*.546,span-4,bridgeHeight);
   // Shear the painted deck and rails together while the posts stay vertical.
   straightBridge.setAttribute('transform',`matrix(1 ${slope} 0 1 0 ${-slope*from.x})`);
-  const [clearingArt,clearingX,clearingY]={"ridge": ["./walk/assets/terrain/ridge-clearing.webp", 1450, 416], "forest": ["./walk/assets/terrain/forest-clearing.webp", 1358, 291], "valley": ["./walk/assets/terrain/valley-clearing.webp", 1490, 364]}[m.id];
+  const [clearingArt,clearingX,clearingY]=campClearingSites[m.id];
   const clearing=$('#iw-camp-clearing');
   clearing.setAttribute('href',clearingArt);
   clearing.setAttribute('x',clearingX);
   clearing.setAttribute('y',clearingY);
   const connector=$('#iw-summit-connector');
-  connector.setAttribute('href',"./walk/assets/map/v912-forest-summit.webp");
+  connector.setAttribute('href',forestSummitArt);
   connector.setAttribute('display',m.id==='forest'?'inline':'none');
   setBox(connector,1736,184,81,35);
   const [a,b]=[C.FERRY_AT,C.BRIDGE_AT];
@@ -3610,17 +3636,72 @@ Object.assign(globalThis.IskorkaStoryWorldAssets, {"spruce": "./walk/assets/v99-
   draw(reduce?1:0);
   save();
  }
- function selectMap(variant){
-  if(s.mapVariant===variant)return;
-  cancelTransition();
+ function mapSwitchStatus(message='',status=''){
+  for(const element of [$('#iw-map-switch-status'),$('#iw-settings-map-switch-status')]){
+   element.textContent=message;
+   element.dataset.status=status;
+   element.hidden=!message;
+  }
+ }
+ function cancelMapSwitch(){
+  if(!mapRequest&&!$('#iw-map-switch-status').textContent)return;
+  mapRequest=null;
+  $('#iw-map-variant').value=s.mapVariant;
+  mapSwitchStatus();
+ }
+ function mapLayers(variant){
+  const art=globalThis.IskorkaStoryWorldAssets;
+  return [surroundings[variant],pathTextures[variant],globalThis.IskorkaBridgeArt[variant],
+   straightBridgeArt,campClearingSites[variant][0],art['fork-'+variant],art['ice-cave-'+variant],
+   ...(variant==='forest'?[forestSummitArt]:[])];
+ }
+ function failMapSwitch(request){
+  if(mapRequest!==request)return;
+  if(s!==request.state||s.page!==request.page){cancelMapSwitch();return;}
+  mapRequest=null;
+  $('#iw-map-variant').value=s.mapVariant;
+  mapSwitchStatus('Не удалось загрузить карту «'+request.name+'». Выберите её ещё раз.','error');
+ }
+ async function selectMap(variant){
+  if(!Object.hasOwn(C.MAPS,variant))return;
+  if(s.mapVariant===variant){cancelMapSwitch();return;}
+  if(mapRequest?.variant===variant)return;
+  const picker=$('#iw-map-variant');
+  const name=id=>[...picker.options].find(option=>option.value===id).textContent;
+  picker.value=variant;
+  const request={variant,name:name(variant),state:s,page:s.page,images:[],ready:false};
+  mapRequest=request;
+  mapSwitchStatus('Загружается «'+request.name+'». Сейчас '+(s.page==='map'?'на экране':'выбрана')+' «'+name(s.mapVariant)+'».','loading');
+  // Keep decoded resources alive until the SVG takes over the same URLs.
+  let timer;
+  try{
+   await Promise.race([
+    Promise.all(mapLayers(variant).map(src=>{
+     const image=new Image();
+     request.images.push(image);
+     image.src=src;
+     return image.decode();
+    })),
+    new Promise((_,reject)=>{timer=setTimeout(reject,15000);})
+   ]);
+   request.ready=true;
+  }catch{failMapSwitch(request);}
+  finally{clearTimeout(timer);}
+ }
+ function commitMapSwitch(){
+  const request=mapRequest;
+  if(!request)return;
+  if(s!==request.state||s.page!==request.page){cancelMapSwitch();return;}
+  if(!request.ready||ferryRideStart!==null||bridgeStart!==null||$('#iw-transition').classList.contains('active'))return;
   const previousMode=s.mode;
-  if(!C.switchMap(s,variant))return;
-  bridgeStart=null;
+  mapRequest=null;
+  C.switchMap(s,request.variant);
   if(previousMode==='overview')s.mode=previousMode;
   clearTimeout(momentTimer);
   configureMap();
   desired=s.mode==='overview'?fullCamera():heroCamera();
   camera={...desired};
+  mapSwitchStatus();
   render();
   save();
  }
@@ -3650,7 +3731,7 @@ Object.assign(globalThis.IskorkaStoryWorldAssets, {"spruce": "./walk/assets/v99-
   if(b.dataset.action==='bag'){openModal('bag');return;}
   if(b.dataset.action==='home'){home();return;}
   if(b.dataset.action==='show-forest'){
-   C.pause(s);
+   cancelMapSwitch();C.pause(s);
    transition(()=>{
     modal=null;s.page='map';s.mode='overview';
     desired=fullCamera();camera={...desired};
@@ -3716,7 +3797,7 @@ Object.assign(globalThis.IskorkaStoryWorldAssets, {"spruce": "./walk/assets/v99-
  new ResizeObserver(()=>{const height=Math.ceil($('.journey-dock').getBoundingClientRect().height);$('#iw-map').style.setProperty('--dock-space',(height+40)+'px');}).observe($('.journey-dock'));
  function loop(time){const dt=lastTime?Math.min(70,time-lastTime):0;lastTime=time;animTime+=dt;if(ferryRideStart!==null&&(reduce||ferryProgress()===1)){ferryRideStart=null;renderMapUI();say('Искорка на другом берегу.');if(s.status!=='walking')focusControl('#iw-map-go');}
   if(bridgeStart!==null&&(reduce||bridgeProgress()===1)){bridgeStart=null;renderMapUI();say('Искорка перешла мостик.');if(s.status!=='walking')focusControl('#iw-map-go');}
-  if(s.page==='map'&&s.status==='walking'&&!modal&&ferryRideStart===null&&bridgeStart===null){const step=Math.floor(s.position),from=C.walkerPoint(step,s.mapVariant,s.seen),to=point(Math.min(C.TOTAL,step+1));const walkDistance=step>=76?C.summitDistance(step+1,s.mapVariant)-C.summitDistance(step,s.mapVariant):Math.hypot(to.x-from.x,to.y-from.y);const screenDistance=walkDistance*svg.clientWidth/Math.max(1,camera.w);const pace=Math.min(1,30/Math.max(1,screenDistance));const event=C.advance(s,dt/680*pace);if(event==='reward'){modal='reward';renderReward();renderModal();renderHome();renderMapUI();icons();focusControl('#iw-continue');say(eventInfo(s.pending).name);save();}else if(event==='done'){renderMapUI();renderHome();say(s.position===C.TOTAL?'Мы добрались до Маяка':'Пройдено '+steps(s.award));save();}else if(Math.floor(s.position)!==lastCheckpoint){lastCheckpoint=Math.floor(s.position);updateMapProgress();$('#iw-next-story').textContent=landmarkCaption();$('#iw-walk-detail').textContent='Осталось '+steps(s.target-s.position);save();}}draw(Math.min(1,dt/150));requestAnimationFrame(loop);}
+  if(s.page==='map'&&s.status==='walking'&&!modal&&ferryRideStart===null&&bridgeStart===null){const step=Math.floor(s.position),from=C.walkerPoint(step,s.mapVariant,s.seen),to=point(Math.min(C.TOTAL,step+1));const walkDistance=step>=76?C.summitDistance(step+1,s.mapVariant)-C.summitDistance(step,s.mapVariant):Math.hypot(to.x-from.x,to.y-from.y);const screenDistance=walkDistance*svg.clientWidth/Math.max(1,camera.w);const pace=Math.min(1,30/Math.max(1,screenDistance));const event=C.advance(s,dt/680*pace);if(event==='reward'){modal='reward';renderReward();renderModal();renderHome();renderMapUI();icons();focusControl('#iw-continue');say(eventInfo(s.pending).name);save();}else if(event==='done'){renderMapUI();renderHome();say(s.position===C.TOTAL?'Мы добрались до Маяка':'Пройдено '+steps(s.award));save();}else if(Math.floor(s.position)!==lastCheckpoint){lastCheckpoint=Math.floor(s.position);updateMapProgress();$('#iw-next-story').textContent=landmarkCaption();$('#iw-walk-detail').textContent='Осталось '+steps(s.target-s.position);save();}}commitMapSwitch();draw(Math.min(1,dt/150));requestAnimationFrame(loop);}
  root.iskorkaState=()=>({state:JSON.parse(JSON.stringify(s)),camera:{...camera},view:{...view},modal,hop:C.hop(s.position,s.mapVariant,reduce),visibleNodes:nodeEls.filter(n=>n.style.display!=='none').length,fogCleared:s.resolved.includes('lighthouse'),location:C.zone(s.position,s.mapVariant)});
  $('#iw-import-file').addEventListener('change',event=>readBackup(event.target.files?.[0]));
  render();let restored=false;if(customerDemo){
